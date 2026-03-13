@@ -18,10 +18,6 @@ namespace InteriorPlanner.Systems.FloorPlan
         [SerializeField] private GameObject wallLinePrefab;
         [SerializeField] private float lineYPosition = 0.05f;
 
-        [Header("Grid Snap")]
-        [SerializeField] private bool useGridSnap = true;
-        [SerializeField] private float gridSize = 0.5f;
-
         private FloorPlanData currentFloorPlan;
         private Vector3? lastPlacedPoint;
         private GameObject previewLineObject;
@@ -70,17 +66,16 @@ namespace InteriorPlanner.Systems.FloorPlan
             if (!MouseWorldUtility.TryGetMousePositionOnPlane(editorCamera, drawingLayerMask, out Vector3 hitPoint))
                 return;
 
-            Vector3 point = GetFlatPoint(hitPoint);
-            point = ApplyGridSnap(point);
+            Vector3 clickedPoint = GetFlatPoint(hitPoint);
 
             if (!lastPlacedPoint.HasValue)
             {
-                lastPlacedPoint = point;
+                lastPlacedPoint = clickedPoint;
                 return;
             }
 
             Vector3 startPoint = lastPlacedPoint.Value;
-            Vector3 endPoint = point;
+            Vector3 endPoint = clickedPoint;
 
             if (Vector3.Distance(startPoint, endPoint) <= 0.01f)
                 return;
@@ -98,8 +93,6 @@ namespace InteriorPlanner.Systems.FloorPlan
                 return;
 
             Vector3 previewEndPoint = GetFlatPoint(hitPoint);
-            previewEndPoint = ApplyGridSnap(previewEndPoint);
-
             previewLineObject.SetActive(true);
             previewLineVisual.SetPoints(lastPlacedPoint.Value, previewEndPoint);
         }
@@ -122,17 +115,6 @@ namespace InteriorPlanner.Systems.FloorPlan
         {
             return new Vector3(originalPoint.x, lineYPosition, originalPoint.z);
         }
-
-  private Vector3 ApplyGridSnap(Vector3 point)
-{
-    if (!useGridSnap || gridSize <= 0f)
-        return point;
-
-    float snappedX = Mathf.Round(point.x / gridSize) * gridSize;
-    float snappedZ = Mathf.Round(point.z / gridSize) * gridSize;
-
-    return new Vector3(snappedX, lineYPosition, snappedZ);
-}
 
         private void CancelCurrentChain()
         {
