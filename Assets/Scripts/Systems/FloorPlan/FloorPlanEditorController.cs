@@ -8,6 +8,7 @@ namespace InteriorPlanner.Systems.FloorPlan
 {
     public class FloorPlanEditorController : MonoBehaviour
     {
+        [SerializeField] private LayerMask wallLayerMask;
         [Header("Scene References")]
         [SerializeField] private Camera editorCamera;
         [SerializeField] private Transform drawingRoot;
@@ -38,7 +39,14 @@ namespace InteriorPlanner.Systems.FloorPlan
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
-                HandleLeftClick();
+                if (Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed)
+                {
+                    TryDeleteWall();
+                }
+                else
+                {
+                    HandleLeftClick();
+                }
             }
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
@@ -60,7 +68,21 @@ namespace InteriorPlanner.Systems.FloorPlan
                 Debug.LogWarning("AppManager não encontrado. A planta atual não será guardada na sessão.");
             }
         }
+        private void TryDeleteWall()
+        {
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            Ray ray = editorCamera.ScreenPointToRay(mousePos);
 
+            if (Physics.Raycast(ray, out RaycastHit hit, 500f, wallLayerMask))
+            {
+                WallLineVisual wall = hit.collider.GetComponent<WallLineVisual>();
+
+                if (wall != null)
+                {
+                    Destroy(wall.gameObject);
+                }
+            }
+        }
         private void HandleLeftClick()
         {
             if (!MouseWorldUtility.TryGetMousePositionOnPlane(editorCamera, drawingLayerMask, out Vector3 hitPoint))

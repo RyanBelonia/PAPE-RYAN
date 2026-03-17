@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 293535089}
   - component: {fileID: 293535090}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FloorPlanManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.FloorPlan.FloorPlanEditorController
   wallLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   editorCamera: {fileID: 1067629808}
   drawingRoot: {fileID: 1497009945}
   previewRoot: {fileID: 433989991}
