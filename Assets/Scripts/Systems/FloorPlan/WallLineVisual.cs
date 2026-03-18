@@ -9,6 +9,9 @@ namespace InteriorPlanner.Systems.FloorPlan
         private LineRenderer lineRenderer;
         private BoxCollider boxCollider;
 
+        private Vector3 startPoint;
+        private Vector3 endPoint;
+
         private void Awake()
         {
             lineRenderer = GetComponent<LineRenderer>();
@@ -18,12 +21,25 @@ namespace InteriorPlanner.Systems.FloorPlan
             lineRenderer.useWorldSpace = true;
         }
 
-        public void SetPoints(Vector3 startPoint, Vector3 endPoint)
+        public void SetPoints(Vector3 start, Vector3 end)
         {
+            startPoint = start;
+            endPoint = end;
+
             lineRenderer.SetPosition(0, startPoint);
             lineRenderer.SetPosition(1, endPoint);
 
             UpdateCollider(startPoint, endPoint);
+        }
+
+        public Vector3 GetStartPoint()
+        {
+            return startPoint;
+        }
+
+        public Vector3 GetEndPoint()
+        {
+            return endPoint;
         }
 
         private void UpdateCollider(Vector3 start, Vector3 end)

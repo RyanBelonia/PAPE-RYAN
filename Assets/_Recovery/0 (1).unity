@@ -440,7 +440,6 @@ MonoBehaviour:
   editorCamera: {fileID: 1067629808}
   drawingRoot: {fileID: 1497009945}
   previewRoot: {fileID: 433989991}
-  vertexRoot: {fileID: 1825093079}
   drawingLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -448,10 +447,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   wallLinePrefab: {fileID: 7288537744895646546, guid: cbcb2ed2c9eecb248b53169c6b8c5eb0, type: 3}
-  vertexPointPrefab: {fileID: 4706500837013725455, guid: 483fb2caadf44dc47b0dbc7c02f73b56, type: 3}
   lineYPosition: 0.05
-  vertexYPosition: 0.06
-  vertexDuplicateTolerance: 0.01
 --- !u!1 &375836707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,37 +1551,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756600162}
   m_CullTransparentMesh: 1
---- !u!1 &1825093078
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1825093079}
-  m_Layer: 0
-  m_Name: VertexRoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1825093079
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825093078}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 607.41815, y: -0, z: 2436.702}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942241491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,4 +1697,3 @@ SceneRoots:
   - {fileID: 1497009945}
   - {fileID: 433989991}
   - {fileID: 293535089}
-  - {fileID: 1825093079}
