@@ -264,6 +264,7 @@ namespace InteriorPlanner.Systems.FloorPlan
         public void OnClickFinishDrawing()
         {
             CancelCurrentChain();
+            SceneController.LoadPlanner();
         }
 
         public void OnClickBackToMenu()
