@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Globalization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using InteriorPlanner.Core;
 using InteriorPlanner.Data;
 using InteriorPlanner.Utilities;
-
+using UnityEngine.EventSystems;
 namespace InteriorPlanner.Systems.FloorPlan
 {
     public class FloorPlanEditorController : MonoBehaviour
@@ -15,6 +17,9 @@ namespace InteriorPlanner.Systems.FloorPlan
         [SerializeField] private Transform previewRoot;
         [SerializeField] private Transform vertexRoot;
 
+        [Header("UI")]
+        [SerializeField] private TMP_InputField wallHeightInput;
+
         [Header("Drawing Setup")]
         [SerializeField] private LayerMask drawingLayerMask;
         [SerializeField] private LayerMask wallLayerMask;
@@ -23,6 +28,10 @@ namespace InteriorPlanner.Systems.FloorPlan
         [SerializeField] private float lineYPosition = 0.05f;
         [SerializeField] private float vertexYPosition = 0.06f;
 
+        [Header("Defaults")]
+        [SerializeField] private float defaultWallHeight = 2.8f;
+        [SerializeField] private float defaultWallThickness = 0.15f;
+
         [Header("Vertex Settings")]
         [SerializeField] private float vertexDuplicateTolerance = 0.01f;
 
@@ -30,12 +39,19 @@ namespace InteriorPlanner.Systems.FloorPlan
         private Vector3? lastPlacedPoint;
         private GameObject previewLineObject;
         private WallLineVisual previewLineVisual;
+        private bool IsPointerOverUI()
+        {
+            bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+            Debug.Log("Over UI: " + overUI);
+            return overUI;
+        }
 
         private readonly List<Vector3> placedVertices = new();
 
         private void Start()
         {
             InitializeFloorPlan();
+            SetDefaultUIValues();
             CreatePreviewLine();
         }
 
@@ -48,6 +64,9 @@ namespace InteriorPlanner.Systems.FloorPlan
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
+                if (IsPointerOverUI())
+                    return;
+
                 bool ctrlPressed =
                     Keyboard.current != null &&
                     (Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed);
@@ -64,13 +83,20 @@ namespace InteriorPlanner.Systems.FloorPlan
 
             if (Mouse.current.rightButton.wasPressedThisFrame)
             {
+                if (IsPointerOverUI())
+                    return;
+
                 CancelCurrentChain();
             }
         }
 
         private void InitializeFloorPlan()
         {
-            currentFloorPlan = new FloorPlanData();
+            currentFloorPlan = new FloorPlanData
+            {
+                WallHeight = defaultWallHeight,
+                WallThickness = defaultWallThickness
+            };
 
             if (AppManager.Instance != null)
             {
@@ -79,6 +105,14 @@ namespace InteriorPlanner.Systems.FloorPlan
             else
             {
                 Debug.LogWarning("AppManager não encontrado. A planta atual não será guardada na sessão.");
+            }
+        }
+
+        private void SetDefaultUIValues()
+        {
+            if (wallHeightInput != null)
+            {
+                wallHeightInput.text = defaultWallHeight.ToString("0.0", CultureInfo.InvariantCulture);
             }
         }
 
@@ -110,6 +144,13 @@ namespace InteriorPlanner.Systems.FloorPlan
 
         private void HandlePreview()
         {
+            if (IsPointerOverUI())
+            {
+                if (previewLineObject != null)
+                    previewLineObject.SetActive(false);
+                return;
+            }
+
             if (!lastPlacedPoint.HasValue || previewLineVisual == null)
                 return;
 
@@ -145,9 +186,7 @@ namespace InteriorPlanner.Systems.FloorPlan
             for (int i = 0; i < placedVertices.Count; i++)
             {
                 if (Vector3.Distance(placedVertices[i], vertexPosition) <= vertexDuplicateTolerance)
-                {
                     return;
-                }
             }
 
             Instantiate(vertexPointPrefab, vertexPosition, Quaternion.identity, vertexRoot);
@@ -264,12 +303,38 @@ namespace InteriorPlanner.Systems.FloorPlan
         public void OnClickFinishDrawing()
         {
             CancelCurrentChain();
+            UpdateFloorPlanSettingsFromUI();
             SceneController.LoadPlanner();
         }
 
         public void OnClickBackToMenu()
         {
             SceneController.LoadMainMenu();
+        }
+
+        private void UpdateFloorPlanSettingsFromUI()
+        {
+            if (currentFloorPlan == null)
+                return;
+
+            currentFloorPlan.WallHeight = ReadWallHeightFromInput();
+            currentFloorPlan.WallThickness = defaultWallThickness;
+        }
+
+        private float ReadWallHeightFromInput()
+        {
+            if (wallHeightInput == null)
+                return defaultWallHeight;
+
+            string value = wallHeightInput.text.Trim().Replace(',', '.');
+
+            if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float result))
+            {
+                if (result > 0.1f)
+                    return result;
+            }
+
+            return defaultWallHeight;
         }
 
         private void ClearAllWalls()

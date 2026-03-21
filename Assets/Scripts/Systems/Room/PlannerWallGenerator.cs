@@ -8,18 +8,24 @@ namespace InteriorPlanner.Systems.Room
     {
         [Header("Scene References")]
         [SerializeField] private Transform wallRoot;
+        [SerializeField] private Transform floorRoot;
 
-        [Header("Wall Settings")]
-        [SerializeField] private float wallHeight = 2.8f;
-        [SerializeField] private float wallThickness = 0.15f;
+        [Header("Fallback Settings")]
+        [SerializeField] private float fallbackWallHeight = 2.8f;
+        [SerializeField] private float fallbackWallThickness = 0.15f;
         [SerializeField] private Material wallMaterial;
+        [SerializeField] private Material floorMaterial;
+
+        [Header("Floor Settings")]
+        [SerializeField] private float floorThickness = 0.1f;
+        [SerializeField] private float floorPadding = 0.2f;
 
         private void Start()
         {
-            GenerateWalls();
+            GenerateRoomFromCurrentProject();
         }
 
-        private void GenerateWalls()
+        private void GenerateRoomFromCurrentProject()
         {
             if (AppManager.Instance == null || !AppManager.Instance.ProjectSession.HasProjectLoaded())
             {
@@ -29,21 +35,26 @@ namespace InteriorPlanner.Systems.Room
 
             ProjectData project = AppManager.Instance.ProjectSession.CurrentProject;
 
-            if (project == null || project.FloorPlan == null || project.FloorPlan.Walls == null)
+            if (project == null || project.FloorPlan == null || project.FloorPlan.Walls == null || project.FloorPlan.Walls.Count == 0)
             {
-                Debug.LogWarning("FloorPlan inválido.");
+                Debug.LogWarning("FloorPlan inválido ou vazio.");
                 return;
             }
 
-            ClearExistingWalls();
+            ClearExistingGeometry();
+
+            float wallHeight = project.FloorPlan.WallHeight > 0.1f ? project.FloorPlan.WallHeight : fallbackWallHeight;
+            float wallThickness = project.FloorPlan.WallThickness > 0.01f ? project.FloorPlan.WallThickness : fallbackWallThickness;
 
             for (int i = 0; i < project.FloorPlan.Walls.Count; i++)
             {
-                CreateWall(project.FloorPlan.Walls[i]);
+                CreateWall(project.FloorPlan.Walls[i], wallHeight, wallThickness);
             }
+
+            CreateAutomaticFloor(project.FloorPlan);
         }
 
-        private void CreateWall(WallSegmentData wallSegment)
+        private void CreateWall(WallSegmentData wallSegment, float wallHeight, float wallThickness)
         {
             Vector3 start = new Vector3(wallSegment.StartPoint.x, 0f, wallSegment.StartPoint.y);
             Vector3 end = new Vector3(wallSegment.EndPoint.x, 0f, wallSegment.EndPoint.y);
@@ -72,14 +83,68 @@ namespace InteriorPlanner.Systems.Room
             }
         }
 
-        private void ClearExistingWalls()
+        private void CreateAutomaticFloor(FloorPlanData floorPlan)
         {
-            if (wallRoot == null)
+            if (floorPlan == null || floorPlan.Walls == null || floorPlan.Walls.Count == 0)
                 return;
 
-            for (int i = wallRoot.childCount - 1; i >= 0; i--)
+            float minX = float.MaxValue;
+            float maxX = float.MinValue;
+            float minZ = float.MaxValue;
+            float maxZ = float.MinValue;
+
+            for (int i = 0; i < floorPlan.Walls.Count; i++)
             {
-                Destroy(wallRoot.GetChild(i).gameObject);
+                WallSegmentData wall = floorPlan.Walls[i];
+
+                UpdateBounds(wall.StartPoint.x, wall.StartPoint.y, ref minX, ref maxX, ref minZ, ref maxZ);
+                UpdateBounds(wall.EndPoint.x, wall.EndPoint.y, ref minX, ref maxX, ref minZ, ref maxZ);
+            }
+
+            float width = (maxX - minX) + floorPadding * 2f;
+            float length = (maxZ - minZ) + floorPadding * 2f;
+
+            Vector3 center = new Vector3(
+                (minX + maxX) / 2f,
+                -floorThickness / 2f,
+                (minZ + maxZ) / 2f
+            );
+
+            GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            floor.name = "Floor_3D";
+            floor.transform.SetParent(floorRoot, true);
+            floor.transform.position = center;
+            floor.transform.localScale = new Vector3(width, floorThickness, length);
+
+            if (floorMaterial != null)
+            {
+                Renderer renderer = floor.GetComponent<Renderer>();
+                renderer.material = floorMaterial;
+            }
+        }
+
+        private void UpdateBounds(float x, float z, ref float minX, ref float maxX, ref float minZ, ref float maxZ)
+        {
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            if (z < minZ) minZ = z;
+            if (z > maxZ) maxZ = z;
+        }
+
+        private void ClearExistingGeometry()
+        {
+            ClearChildren(wallRoot);
+            ClearChildren(floorRoot);
+        }
+
+        private void ClearChildren(Transform root)
+        {
+            if (root == null)
+                return;
+
+            for (int i = root.childCount - 1; i >= 0; i--)
+            {
+                Destroy(root.GetChild(i).gameObject);
             }
         }
     }
