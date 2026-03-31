@@ -4,12 +4,12 @@ namespace InteriorPlanner.Data
     public class ProjectData
     {
         public string ProjectName;
-        public FloorPlanData FloorPlan;
+        public RoomData Room;
 
-        public ProjectData(FloorPlanData floorPlan)
+        public ProjectData(RoomData room)
         {
             ProjectName = "Novo Projeto";
-            FloorPlan = floorPlan;
+            Room = room;
         }
     }
 }

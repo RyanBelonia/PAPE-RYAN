@@ -6,9 +6,9 @@ namespace InteriorPlanner.Core
     {
         public ProjectData CurrentProject { get; private set; }
 
-        public void CreateNewProject(FloorPlanData floorPlanData)
+        public void CreateNewProject(RoomData roomData)
         {
-            CurrentProject = new ProjectData(floorPlanData);
+            CurrentProject = new ProjectData(roomData);
         }
 
         public void ClearProject()

@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9c0c495030553e442bf5c3a0083a5034
   - enabled: 1
-    path: Assets/Scenes/FloorPlanEditor.unity
-    guid: 3bb68fb0dc7917a45884da73ca5d98cc
+    path: Assets/Scenes/ProjectSetup.unity
+    guid: 4b290e5906dd66e4f9ab2b5eb1c26ef0
   - enabled: 1
     path: Assets/Scenes/Planner.unity
     guid: 6b89de616a472394faf8def63894299b

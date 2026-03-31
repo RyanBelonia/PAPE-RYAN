@@ -5,15 +5,15 @@ namespace InteriorPlanner.Systems.Menu
 {
     public class MainMenuUIController : MonoBehaviour
     {
-         public void OnClickNewProject()
+        public void OnClickNewProject()
         {
-            SceneController.LoadFloorPlanEditor();
+            SceneController.LoadProjectSetup();
         }
 
         public void OnClickOpenProject()
         {
             Debug.Log("Sistema de abrir projeto ainda não implementado.");
-            SceneController.LoadFloorPlanEditor();
+            SceneController.LoadProjectSetup();
         }
 
         public void OnClickExit()

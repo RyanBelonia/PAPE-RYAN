@@ -9,9 +9,9 @@ namespace InteriorPlanner.Core
             SceneManager.LoadScene("MainMenu");
         }
 
-        public static void LoadFloorPlanEditor()
+        public static void LoadProjectSetup()
         {
-            SceneManager.LoadScene("FloorPlanEditor");
+            SceneManager.LoadScene("ProjectSetup");
         }
 
         public static void LoadPlanner()
