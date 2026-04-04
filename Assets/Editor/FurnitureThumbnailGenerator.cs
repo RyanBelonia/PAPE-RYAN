@@ -8,9 +8,8 @@ public class FurnitureThumbnailGenerator : EditorWindow
     private string prefabsRootFolder = "Assets/Prefabs/Furniture";
     private string outputRootFolder = "Assets/Art/Icons/Furniture";
 
-    private List<Object> pendingAssets;
-    private Dictionary<Object, string> assetOutputPaths;
-    private EditorApplication.CallbackFunction updateAction;
+    private Queue<Object> pendingQueue = new Queue<Object>();
+    private Dictionary<Object, string> assetOutputPaths = new Dictionary<Object, string>();
 
     [MenuItem("Tools/Furniture/Generate Thumbnails")]
     public static void OpenWindow()
@@ -20,7 +19,7 @@ public class FurnitureThumbnailGenerator : EditorWindow
 
     private void OnGUI()
     {
-        GUILayout.Label("Gerador Automático de Thumbnails", EditorStyles.boldLabel);
+        GUILayout.Label("Gerador SEGURO de Thumbnails", EditorStyles.boldLabel);
 
         prefabsRootFolder = EditorGUILayout.TextField("Pasta raiz dos Prefabs", prefabsRootFolder);
         outputRootFolder = EditorGUILayout.TextField("Pasta raiz de saída", outputRootFolder);
@@ -29,15 +28,15 @@ public class FurnitureThumbnailGenerator : EditorWindow
 
         if (GUILayout.Button("Gerar Thumbnails"))
         {
-            GenerateThumbnails();
+            PrepareThumbnails();
         }
     }
 
-    private void GenerateThumbnails()
+    private void PrepareThumbnails()
     {
         if (!AssetDatabase.IsValidFolder(prefabsRootFolder))
         {
-            Debug.LogError("A pasta de prefabs não existe: " + prefabsRootFolder);
+            Debug.LogError("Pasta de prefabs inválida: " + prefabsRootFolder);
             return;
         }
 
@@ -48,14 +47,8 @@ public class FurnitureThumbnailGenerator : EditorWindow
 
         string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { prefabsRootFolder });
 
-        if (prefabGuids.Length == 0)
-        {
-            Debug.LogWarning("Nenhum prefab encontrado em: " + prefabsRootFolder);
-            return;
-        }
-
-        pendingAssets = new List<Object>();
-        assetOutputPaths = new Dictionary<Object, string>();
+        pendingQueue.Clear();
+        assetOutputPaths.Clear();
 
         foreach (string guid in prefabGuids)
         {
@@ -65,76 +58,102 @@ public class FurnitureThumbnailGenerator : EditorWindow
             if (asset == null)
                 continue;
 
-            string relativeFolder = GetRelativeSubfolder(prefabPath, prefabsRootFolder);
-            string outputFolder = string.IsNullOrEmpty(relativeFolder)
+            string subfolder = GetRelativeSubfolder(prefabPath, prefabsRootFolder);
+            string outputFolder = string.IsNullOrEmpty(subfolder)
                 ? outputRootFolder
-                : $"{outputRootFolder}/{relativeFolder}";
+                : $"{outputRootFolder}/{subfolder}";
 
             if (!AssetDatabase.IsValidFolder(outputFolder))
             {
                 CreateFoldersRecursively(outputFolder);
             }
 
-            string outputFilePath = $"{outputFolder}/{asset.name}.png";
-
-            pendingAssets.Add(asset);
-            assetOutputPaths[asset] = outputFilePath;
-        }
-
-        updateAction = ProcessPreviews;
-        EditorApplication.update += updateAction;
-
-        Debug.Log("A gerar thumbnails...");
-    }
-
-    private void ProcessPreviews()
-    {
-        bool stillLoading = false;
-        bool createdAny = false;
-
-        foreach (Object asset in pendingAssets)
-        {
-            if (asset == null)
-                continue;
-
-            Texture2D preview = AssetPreview.GetAssetPreview(asset);
-
-            if (preview == null)
-            {
-                if (AssetPreview.IsLoadingAssetPreview(asset.GetInstanceID()))
-                {
-                    stillLoading = true;
-                }
-                continue;
-            }
-
-            if (!assetOutputPaths.TryGetValue(asset, out string filePath))
-                continue;
+            string filePath = $"{outputFolder}/{asset.name}.png";
 
             if (!File.Exists(filePath))
             {
-                byte[] pngData = preview.EncodeToPNG();
-                File.WriteAllBytes(filePath, pngData);
-                createdAny = true;
-                Debug.Log("Thumbnail criada: " + filePath);
+                pendingQueue.Enqueue(asset);
+                assetOutputPaths[asset] = filePath;
             }
         }
 
-        if (!stillLoading)
+        if (pendingQueue.Count == 0)
         {
-            if (updateAction != null)
-            {
-                EditorApplication.update -= updateAction;
-                updateAction = null;
-            }
-
-            if (createdAny)
-            {
-                AssetDatabase.Refresh();
-            }
-
-            Debug.Log("Geração de thumbnails terminada.");
+            Debug.Log("Todos os ícones já existem.");
+            return;
         }
+
+        EditorApplication.update -= ProcessQueue;
+        EditorApplication.update += ProcessQueue;
+
+        Debug.Log($"Iniciando geração de {pendingQueue.Count} ícones...");
+    }
+
+    private void ProcessQueue()
+    {
+        if (pendingQueue.Count == 0)
+        {
+            EditorApplication.update -= ProcessQueue;
+            AssetDatabase.Refresh();
+            Debug.Log("Geração finalizada.");
+            return;
+        }
+
+        Object asset = pendingQueue.Peek();
+
+        if (asset == null)
+        {
+            pendingQueue.Dequeue();
+            return;
+        }
+
+        if (AssetPreview.IsLoadingAssetPreview(asset.GetInstanceID()))
+        {
+            return;
+        }
+
+        Texture2D preview = AssetPreview.GetAssetPreview(asset);
+
+        if (preview == null)
+        {
+            AssetPreview.GetAssetPreview(asset);
+            return;
+        }
+
+        string outputPath = assetOutputPaths[asset];
+
+        Texture2D readableCopy = CopyToReadableTexture(preview);
+        if (readableCopy != null)
+        {
+            byte[] pngData = readableCopy.EncodeToPNG();
+            File.WriteAllBytes(outputPath, pngData);
+            DestroyImmediate(readableCopy);
+
+            Debug.Log($"Ícone criado para: {asset.name} ({pendingQueue.Count - 1} restantes)");
+        }
+
+        pendingQueue.Dequeue();
+
+        EditorUtility.UnloadUnusedAssetsImmediate();
+        System.GC.Collect();
+    }
+
+    private Texture2D CopyToReadableTexture(Texture2D source)
+    {
+        RenderTexture rt = RenderTexture.GetTemporary(source.width, source.height, 0, RenderTextureFormat.ARGB32);
+        RenderTexture previous = RenderTexture.active;
+
+        Graphics.Blit(source, rt);
+        RenderTexture.active = rt;
+
+        Texture2D copy = new Texture2D(source.width, source.height, TextureFormat.RGBA32, false);
+        copy.ReadPixels(new Rect(0, 0, source.width, source.height), 0, 0);
+        copy.Apply();
+
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(rt);
+
+        return copy;
     }
 
     private string GetRelativeSubfolder(string assetPath, string rootFolder)
@@ -143,10 +162,7 @@ public class FurnitureThumbnailGenerator : EditorWindow
         rootFolder = rootFolder.Replace("\\", "/");
 
         if (assetDirectory.StartsWith(rootFolder))
-        {
-            string relative = assetDirectory.Substring(rootFolder.Length).TrimStart('/');
-            return relative;
-        }
+            return assetDirectory.Substring(rootFolder.Length).TrimStart('/');
 
         return string.Empty;
     }
