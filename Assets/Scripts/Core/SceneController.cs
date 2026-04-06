@@ -14,6 +14,11 @@ namespace InteriorPlanner.Core
             SceneManager.LoadScene("ProjectSetup");
         }
 
+        public static void LoadLoading()
+        {
+            SceneManager.LoadScene("Loading");
+        }
+
         public static void LoadPlanner()
         {
             SceneManager.LoadScene("Planner");

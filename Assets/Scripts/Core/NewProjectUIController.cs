@@ -45,7 +45,7 @@ namespace InteriorPlanner.Systems.ProjectSetup
 
             RoomData roomData = new RoomData(width, length, height);
             AppManager.Instance.ProjectSession.CreateNewProject(roomData);
-            SceneController.LoadPlanner();
+            SceneController.LoadLoading();
         }
 
         public void OnClickBack()
