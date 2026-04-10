@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7188491424541565086}
   - component: {fileID: 5634983923824143790}
   - component: {fileID: 4936734882213987}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer24_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,6 +64,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,9 +87,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1925586363465169362
 GameObject:
@@ -100,7 +104,7 @@ GameObject:
   - component: {fileID: 8411673399172605288}
   - component: {fileID: 7950596856083691078}
   - component: {fileID: 8772300275834319013}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer24_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,6 +154,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -171,9 +177,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6565191558050778065
 GameObject:
@@ -186,7 +194,7 @@ GameObject:
   - component: {fileID: 1565023335552114996}
   - component: {fileID: 3933513714886704354}
   - component: {fileID: 6610301525417854516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer24_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,6 +244,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -257,9 +267,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7780838602329023242
 GameObject:
@@ -272,7 +284,7 @@ GameObject:
   - component: {fileID: 5576971743495798142}
   - component: {fileID: 2199629517358921741}
   - component: {fileID: 3870113096159670878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer24_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,6 +334,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -343,9 +357,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8665506931169278031
 GameObject:
@@ -356,7 +372,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7007106958660309131}
-  m_Layer: 0
+  - component: {fileID: 5055175576939750566}
+  - component: {fileID: 3184009800116152046}
+  m_Layer: 8
   m_Name: Drawer24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,3 +397,47 @@ Transform:
   - {fileID: 7188491424541565086}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5055175576939750566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665506931169278031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 4936734882213987}
+  - {fileID: 6610301525417854516}
+  - {fileID: 3870113096159670878}
+  - {fileID: 8772300275834319013}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &3184009800116152046
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665506931169278031}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7392001, y: 1.2607486, z: 0.9266404}
+  m_Center: {x: -0.000000029802322, y: 0.63037425, z: -0.00000011920929}

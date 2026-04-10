@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: d934d292433214141a635aa9f17d12ce
+guid: 9111c6bbbaa421f4b9e3dea67ef2f8a5
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/KitchenOven02.prefab
-  uploadId: 785398

@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1272116737950564080}
-  m_Layer: 0
+  - component: {fileID: 7338942105755220934}
+  - component: {fileID: 5014307836158700111}
+  m_Layer: 8
   m_Name: Toilet05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +34,50 @@ Transform:
   - {fileID: 8040004421092301540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7338942105755220934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439184718968185655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 5669942785321421863}
+  - {fileID: 6531272288051274409}
+  - {fileID: 6733806935980474216}
+  - {fileID: 1235061149122064277}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &5014307836158700111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439184718968185655}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7596514, y: 1.8390071, z: 1.447151}
+  m_Center: {x: -0.002687931, y: 0.9195035, z: -0.11026442}
 --- !u!1 &3549457389830648636
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +89,7 @@ GameObject:
   - component: {fileID: 8449890147014344110}
   - component: {fileID: 1953359173997583837}
   - component: {fileID: 1235061149122064277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ToiletSeat05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,6 +139,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -114,9 +162,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4555913133196329597
 GameObject:
@@ -129,7 +179,7 @@ GameObject:
   - component: {fileID: 8040004421092301540}
   - component: {fileID: 2763026290920797401}
   - component: {fileID: 5669942785321421863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Toilet05_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,6 +232,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -203,9 +255,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6386681235242829073
 GameObject:
@@ -218,7 +272,7 @@ GameObject:
   - component: {fileID: 4756829878938189576}
   - component: {fileID: 4583550239662908807}
   - component: {fileID: 6531272288051274409}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ToiletCover05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,6 +322,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -289,9 +345,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7759904330446489779
 GameObject:
@@ -304,7 +362,7 @@ GameObject:
   - component: {fileID: 3769500502253452278}
   - component: {fileID: 6888673758388860377}
   - component: {fileID: 6733806935980474216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ToiletFlushButton05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,6 +412,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -375,7 +435,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

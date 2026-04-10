@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6975577794748637125}
   - component: {fileID: 8083416637582056597}
   - component: {fileID: 3965697838308092543}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Refrigerator06_Door02.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,9 +84,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1632845609734391514
 GameObject:
@@ -97,7 +101,7 @@ GameObject:
   - component: {fileID: 7711903449951610364}
   - component: {fileID: 5966484889523116656}
   - component: {fileID: 8639078448380457302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Refrigerator06_Door02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +151,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -168,9 +174,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1723946484545537974
 GameObject:
@@ -183,7 +191,7 @@ GameObject:
   - component: {fileID: 6923306900065173266}
   - component: {fileID: 3709402827302383769}
   - component: {fileID: 2186222880602335063}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Refrigerator04_Door03.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,6 +241,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -254,9 +264,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2682523531727739917
 GameObject:
@@ -269,7 +281,7 @@ GameObject:
   - component: {fileID: 2402774270811401034}
   - component: {fileID: 8322664085240992490}
   - component: {fileID: 178168415268610820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Refrigerator06_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,6 +335,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -344,9 +358,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4392213585455359893
 GameObject:
@@ -357,7 +373,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5693910647522554766}
-  m_Layer: 0
+  - component: {fileID: 6100013854173007957}
+  - component: {fileID: 8556621633335273013}
+  m_Layer: 8
   m_Name: Refrigerator06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,6 +398,51 @@ Transform:
   - {fileID: 2402774270811401034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6100013854173007957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4392213585455359893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 178168415268610820}
+  - {fileID: 3929741985555436820}
+  - {fileID: 2186222880602335063}
+  - {fileID: 8639078448380457302}
+  - {fileID: 3965697838308092543}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &8556621633335273013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4392213585455359893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0431118, y: 4.0787563, z: 2.1635535}
+  m_Center: {x: 0, y: 2.0393782, z: -0.15916789}
 --- !u!1 &6994861650390982803
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +454,7 @@ GameObject:
   - component: {fileID: 551299175227111566}
   - component: {fileID: 2659939919425808245}
   - component: {fileID: 3929741985555436820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Refrigerator04_Door03.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,6 +504,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -462,7 +527,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

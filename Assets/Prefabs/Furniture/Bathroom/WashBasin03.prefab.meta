@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 182b71f7a2fdaf44d9ba452feadf84d2
+guid: 49c66818fb321f142a945f7df2b6efe3
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Bathroom/WashBasin03.prefab
-  uploadId: 785398

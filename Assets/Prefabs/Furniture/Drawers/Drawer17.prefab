@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5848079041432166585}
   - component: {fileID: 2487230051634716013}
   - component: {fileID: 4830107256125485380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer17_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,9 +84,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1546909645342119659
 GameObject:
@@ -95,7 +99,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2508226921107221571}
-  m_Layer: 0
+  - component: {fileID: 561823492254078896}
+  - component: {fileID: 2146247457241087923}
+  m_Layer: 8
   m_Name: Drawer17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +124,51 @@ Transform:
   - {fileID: 696109623761908235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &561823492254078896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546909645342119659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 6459863677209277852}
+  - {fileID: 380921159785967041}
+  - {fileID: 5198156942387170694}
+  - {fileID: 4830107256125485380}
+  - {fileID: 681676145137602082}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &2146247457241087923
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546909645342119659}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.859203, y: 1.7744217, z: 0.8605708}
+  m_Center: {x: 0, y: 0.8872108, z: -0.013357967}
 --- !u!1 &2607144538334002438
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +180,7 @@ GameObject:
   - component: {fileID: 696109623761908235}
   - component: {fileID: 1618997191184879067}
   - component: {fileID: 6459863677209277852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer17_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,6 +234,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -204,9 +257,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4971061848625096769
 GameObject:
@@ -219,7 +274,7 @@ GameObject:
   - component: {fileID: 8548747985083897066}
   - component: {fileID: 8002448632492149921}
   - component: {fileID: 380921159785967041}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer17_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,6 +324,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -290,9 +347,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5489848428570142063
 GameObject:
@@ -305,7 +364,7 @@ GameObject:
   - component: {fileID: 6971776876075369757}
   - component: {fileID: 5024926806526338571}
   - component: {fileID: 5198156942387170694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer17_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,6 +414,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -376,9 +437,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6716177971033174265
 GameObject:
@@ -391,7 +454,7 @@ GameObject:
   - component: {fileID: 2279059109573060046}
   - component: {fileID: 1168277413118676825}
   - component: {fileID: 681676145137602082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer17_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,6 +504,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -462,7 +527,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

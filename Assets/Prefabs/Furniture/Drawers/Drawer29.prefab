@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8433235047101547835}
   - component: {fileID: 3414023731236133381}
   - component: {fileID: 8672422022465210060}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer29_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,6 +66,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -87,9 +89,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2511596287566182294
 GameObject:
@@ -102,7 +106,7 @@ GameObject:
   - component: {fileID: 6949704998781831716}
   - component: {fileID: 7482191192580481172}
   - component: {fileID: 4408931474379059898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer29_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,6 +156,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -173,9 +179,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2682287009180634879
 GameObject:
@@ -188,7 +196,7 @@ GameObject:
   - component: {fileID: 3771911842241035297}
   - component: {fileID: 7360112273276098960}
   - component: {fileID: 223777008402992374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer29_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,6 +246,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -259,9 +269,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5577076842758532944
 GameObject:
@@ -274,7 +286,7 @@ GameObject:
   - component: {fileID: 1323576955946661698}
   - component: {fileID: 8619880264050819490}
   - component: {fileID: 8775781910645277370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer29_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,6 +336,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -345,9 +359,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5696575216820455693
 GameObject:
@@ -360,7 +376,7 @@ GameObject:
   - component: {fileID: 6085800958351001656}
   - component: {fileID: 8460773145045693208}
   - component: {fileID: 6289440822510053443}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer29_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,6 +426,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -431,9 +449,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6549143267892742837
 GameObject:
@@ -446,7 +466,7 @@ GameObject:
   - component: {fileID: 5054396989766157156}
   - component: {fileID: 3145797940328877997}
   - component: {fileID: 2318063498150434554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drawer29_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,6 +516,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -517,9 +539,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8033957829732414637
 GameObject:
@@ -530,7 +554,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1286810941772741256}
-  m_Layer: 0
+  - component: {fileID: 7774683989863739563}
+  - component: {fileID: 1054239622573096519}
+  m_Layer: 8
   m_Name: Drawer29
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,3 +579,49 @@ Transform:
   - {fileID: 8433235047101547835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7774683989863739563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033957829732414637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 8672422022465210060}
+  - {fileID: 6289440822510053443}
+  - {fileID: 8775781910645277370}
+  - {fileID: 2318063498150434554}
+  - {fileID: 223777008402992374}
+  - {fileID: 4408931474379059898}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &1054239622573096519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033957829732414637}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7107202, y: 1.7385161, z: 0.98107886}
+  m_Center: {x: 0, y: 0.869258, z: -0.015339255}

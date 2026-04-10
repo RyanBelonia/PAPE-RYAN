@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2998789838631161100}
   - component: {fileID: 1256506632024811711}
   - component: {fileID: 2640171134622317853}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CabinetF04_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,6 +63,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -84,9 +86,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2945371166059504382
 GameObject:
@@ -99,7 +103,7 @@ GameObject:
   - component: {fileID: 5074049017210548352}
   - component: {fileID: 3707156628401521549}
   - component: {fileID: 8739205772007743424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CabinetF04Drawer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +153,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -170,9 +176,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3768817547765381181
 GameObject:
@@ -183,7 +191,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4058792967894136190}
-  m_Layer: 0
+  - component: {fileID: 8712917408783520497}
+  - component: {fileID: 3393348094226190954}
+  m_Layer: 8
   m_Name: CabinetF04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,6 +216,49 @@ Transform:
   - {fileID: 2998789838631161100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8712917408783520497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768817547765381181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 2640171134622317853}
+  - {fileID: 3891828872221708933}
+  - {fileID: 8739205772007743424}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &3393348094226190954
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768817547765381181}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9256151, y: 2.0170276, z: 1.2939204}
+  m_Center: {x: -0.46280754, y: 1.0085136, z: 0.5563517}
 --- !u!1 &3864613800792125901
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +270,7 @@ GameObject:
   - component: {fileID: 980822277146546344}
   - component: {fileID: 2479426899367062329}
   - component: {fileID: 3891828872221708933}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CabinetF03Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,6 +320,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -288,7 +343,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

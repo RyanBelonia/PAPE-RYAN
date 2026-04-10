@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 83ab64f430bcd4c40b7890c0f82eb665
+guid: a9257d41e7478df47ba4ad9699556f90
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/CabinetACorner02.prefab
-  uploadId: 785398

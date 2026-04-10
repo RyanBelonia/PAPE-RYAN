@@ -47,6 +47,18 @@ namespace InteriorPlanner.Systems.Room
             floor.transform.position = new Vector3(0f, -floorThickness / 2f, 0f);
             floor.transform.localScale = new Vector3(room.Width, floorThickness, room.Length);
 
+            // --- NOVO: Define a layer do chão para "Ground" ---
+            int groundLayer = LayerMask.NameToLayer("Ground");
+            if (groundLayer == -1)
+            {
+                Debug.LogWarning("A Layer 'Ground' não existe! Vai a Edit > Project Settings > Tags and Layers e cria-a.");
+            }
+            else
+            {
+                floor.layer = groundLayer;
+            }
+            // ----------------------------------------------------
+
             if (floorMaterial != null)
                 floor.GetComponent<Renderer>().material = floorMaterial;
         }
@@ -98,4 +110,4 @@ namespace InteriorPlanner.Systems.Room
             }
         }
     }
-} 
+}

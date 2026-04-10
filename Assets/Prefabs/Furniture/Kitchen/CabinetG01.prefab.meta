@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: d57695dc5e4d6b541ad2c5a9c896b917
+guid: 44c04ff1078c1cf46beeced61b3925cd
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/CabinetG01.prefab
-  uploadId: 785398

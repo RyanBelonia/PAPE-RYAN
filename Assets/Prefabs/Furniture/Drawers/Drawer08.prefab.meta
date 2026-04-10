@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 69ab033508b3cf7429182f37f6711a6a
+guid: d0354a209c36cdf4eb421604538c1277
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Drawers/Drawer08.prefab
-  uploadId: 785398

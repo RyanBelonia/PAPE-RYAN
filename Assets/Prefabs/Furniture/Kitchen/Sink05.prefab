@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3373069681243682283}
   - component: {fileID: 1019325832464380182}
   - component: {fileID: 8655371849799608339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SinkFaucet05Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,9 +84,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &770311223278035615
 GameObject:
@@ -97,7 +101,7 @@ GameObject:
   - component: {fileID: 3302792494654772205}
   - component: {fileID: 7892867560441700622}
   - component: {fileID: 6737927595516492564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sink05_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,6 +154,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -171,9 +177,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1541532548997110254
 GameObject:
@@ -186,7 +194,7 @@ GameObject:
   - component: {fileID: 7393160364996653169}
   - component: {fileID: 6536697071987769931}
   - component: {fileID: 890224368055407450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sink05Net01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,6 +244,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -257,9 +267,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5207576131915907544
 GameObject:
@@ -270,7 +282,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6515709866721394855}
-  m_Layer: 0
+  - component: {fileID: 3851596487873148157}
+  - component: {fileID: 6209300101225146153}
+  m_Layer: 8
   m_Name: Sink05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,6 +307,51 @@ Transform:
   - {fileID: 3302792494654772205}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3851596487873148157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207576131915907544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 6737927595516492564}
+  - {fileID: 890224368055407450}
+  - {fileID: 1821049390728805502}
+  - {fileID: 7861952935448559212}
+  - {fileID: 8655371849799608339}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &6209300101225146153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5207576131915907544}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0783184, y: 2.4917433, z: 0.9963454}
+  m_Center: {x: 0.44571805, y: -0.5091511, z: 0.00000011920929}
 --- !u!1 &7997413626487585779
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +363,7 @@ GameObject:
   - component: {fileID: 868822689146111826}
   - component: {fileID: 7315633594658033694}
   - component: {fileID: 7861952935448559212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SinkFaucet05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,6 +414,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -376,9 +437,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9086503015020696395
 GameObject:
@@ -391,7 +454,7 @@ GameObject:
   - component: {fileID: 6188681459122067738}
   - component: {fileID: 5502496964052373598}
   - component: {fileID: 1821049390728805502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sink05Net02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,6 +504,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -462,7 +527,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

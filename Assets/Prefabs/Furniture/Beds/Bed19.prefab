@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8760529928911520547}
   - component: {fileID: 2028615379454527121}
   - component: {fileID: 7098638389899527017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BedFrame19_Drawer01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,9 +84,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1358469075368028342
 GameObject:
@@ -97,7 +101,7 @@ GameObject:
   - component: {fileID: 7386876962234627289}
   - component: {fileID: 8474388203914554033}
   - component: {fileID: 7657137496190715990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BedFrame19_Drawer03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,6 +151,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -168,9 +174,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2584077915535302652
 GameObject:
@@ -183,7 +191,7 @@ GameObject:
   - component: {fileID: 7574513539896971170}
   - component: {fileID: 1983621151733876318}
   - component: {fileID: 2275571335949252445}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blanket19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,6 +241,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -254,9 +264,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3634722756236449010
 GameObject:
@@ -269,7 +281,7 @@ GameObject:
   - component: {fileID: 5240464563558215505}
   - component: {fileID: 6569075973145178968}
   - component: {fileID: 1123273672453480368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BedFrame19_Drawer05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,6 +331,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -340,9 +354,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3672951293313346236
 GameObject:
@@ -353,7 +369,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7719758245991972190}
-  m_Layer: 0
+  - component: {fileID: 4337294437200750771}
+  - component: {fileID: 815625591025264237}
+  m_Layer: 8
   m_Name: Bed19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,6 +394,54 @@ Transform:
   - {fileID: 6322470685671283463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4337294437200750771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3672951293313346236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 4069477398596603337}
+  - {fileID: 7098638389899527017}
+  - {fileID: 5764800562653251363}
+  - {fileID: 7657137496190715990}
+  - {fileID: 4655551671344259414}
+  - {fileID: 1123273672453480368}
+  - {fileID: 2275571335949252445}
+  - {fileID: 7000686562660041830}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &815625591025264237
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3672951293313346236}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.0145473, y: 2.7069454, z: 4.9970245}
+  m_Center: {x: -0.0013518333, y: 1.3534724, z: -0.20360112}
 --- !u!1 &4903400094678114424
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +453,7 @@ GameObject:
   - component: {fileID: 6322470685671283463}
   - component: {fileID: 2155521110212355298}
   - component: {fileID: 4069477398596603337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BedFrame19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,6 +510,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -465,9 +533,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5070359742932022150
 GameObject:
@@ -480,7 +550,7 @@ GameObject:
   - component: {fileID: 8785950016019742818}
   - component: {fileID: 9046822145997202363}
   - component: {fileID: 5764800562653251363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BedFrame19_Drawer02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,6 +600,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -551,9 +623,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7307899712228380143
 GameObject:
@@ -566,7 +640,7 @@ GameObject:
   - component: {fileID: 3987863116958668260}
   - component: {fileID: 7020018886429230604}
   - component: {fileID: 4655551671344259414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BedFrame19_Drawer04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -616,6 +690,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -637,9 +713,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8544130512033062804
 GameObject:
@@ -652,7 +730,7 @@ GameObject:
   - component: {fileID: 2902110278013402529}
   - component: {fileID: 1965348558933908698}
   - component: {fileID: 7000686562660041830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mattress19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -702,6 +780,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -723,7 +803,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

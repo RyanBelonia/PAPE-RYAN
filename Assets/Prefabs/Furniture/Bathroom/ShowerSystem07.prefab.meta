@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: ced5777a8452b53428faa4c62c9701c6
+guid: ff5b91ac9a3e8d847bdc94f1450d12cb
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Bathroom/ShowerSystem07.prefab
-  uploadId: 785398

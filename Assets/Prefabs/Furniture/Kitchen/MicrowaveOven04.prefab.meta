@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: e6f65607f476f9d41852e008465e9590
+guid: e5d1c6b9a255d5240914c60e51d986f7
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/MicrowaveOven04.prefab
-  uploadId: 785398

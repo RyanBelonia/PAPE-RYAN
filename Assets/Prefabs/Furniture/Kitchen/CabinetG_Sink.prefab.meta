@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: e575cab885e18d543a480d6e7724283f
+guid: 243634d97e499074f890f3e58d8b718b
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/CabinetG_Sink.prefab
-  uploadId: 785398

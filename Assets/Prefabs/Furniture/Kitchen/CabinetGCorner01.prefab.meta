@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 66439534740f77548b4a7401823ca5ea
+guid: c3dd3dc7a0f81d242afe757982913c22
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/CabinetGCorner01.prefab
-  uploadId: 785398

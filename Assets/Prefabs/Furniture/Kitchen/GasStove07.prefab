@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7079883625758466508}
-  m_Layer: 0
+  - component: {fileID: 5337606346948867817}
+  - component: {fileID: 5730616362705300807}
+  m_Layer: 8
   m_Name: GasStove07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +34,51 @@ Transform:
   - {fileID: 4363701529840167691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5337606346948867817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2544207305194850196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 4355273237930727065}
+  - {fileID: 5537221879184946308}
+  - {fileID: 3769192913364423859}
+  - {fileID: 8365716416985754992}
+  - {fileID: 1420302904360188548}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &5730616362705300807
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2544207305194850196}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4474769, y: 0.13175634, z: 1.2831526}
+  m_Center: {x: 0.000000059604645, y: 0.06587804, z: 0}
 --- !u!1 &2776401362170574318
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +90,7 @@ GameObject:
   - component: {fileID: 5525047276015434192}
   - component: {fileID: 7362894056811585804}
   - component: {fileID: 5537221879184946308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GasStove07_Knob01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,6 +140,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -114,9 +163,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2800332059957313952
 GameObject:
@@ -129,7 +180,7 @@ GameObject:
   - component: {fileID: 4363701529840167691}
   - component: {fileID: 2834678696536699338}
   - component: {fileID: 4355273237930727065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GasStove07_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,6 +234,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -204,9 +257,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4316004378326274028
 GameObject:
@@ -219,7 +274,7 @@ GameObject:
   - component: {fileID: 7363681049829389936}
   - component: {fileID: 7570986147656412520}
   - component: {fileID: 3769192913364423859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GasStove07_Knob02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,6 +324,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -290,9 +347,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4882016334312282760
 GameObject:
@@ -305,7 +364,7 @@ GameObject:
   - component: {fileID: 4686994823389873353}
   - component: {fileID: 5188399368734291182}
   - component: {fileID: 1420302904360188548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GasStove07_Knob04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,6 +414,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -376,9 +437,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8514929040209601689
 GameObject:
@@ -391,7 +454,7 @@ GameObject:
   - component: {fileID: 6571440643536175531}
   - component: {fileID: 7663708407260625615}
   - component: {fileID: 8365716416985754992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GasStove07_Knob03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,6 +504,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -462,7 +527,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

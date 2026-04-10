@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7650723187584291463}
   - component: {fileID: 3423898695780630370}
   - component: {fileID: 2912846817805383519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KitchenOven04_Knob02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,9 +84,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &907983186201143910
 GameObject:
@@ -97,7 +101,7 @@ GameObject:
   - component: {fileID: 439975318581927123}
   - component: {fileID: 6645021752191341865}
   - component: {fileID: 8541034677637637774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KitchenOven04_Door01_Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +152,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -169,9 +175,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1501945003437704747
 GameObject:
@@ -184,7 +192,7 @@ GameObject:
   - component: {fileID: 3067516706996996091}
   - component: {fileID: 7207187433582732028}
   - component: {fileID: 2477727793190649316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KitchenOven04_Door01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,6 +243,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -256,9 +266,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2980169150521086596
 GameObject:
@@ -271,7 +283,7 @@ GameObject:
   - component: {fileID: 1798028192780219988}
   - component: {fileID: 1937243109101317810}
   - component: {fileID: 464535515233318363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KitchenOven04_Knob01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,6 +333,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -342,9 +356,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3450434684233413458
 GameObject:
@@ -357,7 +373,7 @@ GameObject:
   - component: {fileID: 6772453535664620125}
   - component: {fileID: 8016005745986145687}
   - component: {fileID: 7462324522367620123}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KitchenOven04_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,6 +423,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -428,9 +446,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3647005327313707796
 GameObject:
@@ -441,7 +461,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7467770383669503984}
-  m_Layer: 0
+  - component: {fileID: 2100853738028802870}
+  - component: {fileID: 8468098204620365790}
+  m_Layer: 8
   m_Name: KitchenOven04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,6 +486,53 @@ Transform:
   - {fileID: 6855731909788198976}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100853738028802870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647005327313707796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 7095451186553356581}
+  - {fileID: 8541034677637637774}
+  - {fileID: 2477727793190649316}
+  - {fileID: 7462324522367620123}
+  - {fileID: 464535515233318363}
+  - {fileID: 2912846817805383519}
+  - {fileID: 2936286148651309973}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &8468098204620365790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647005327313707796}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3379276, y: 1.1544349, z: 0.9598925}
+  m_Center: {x: 0.0000005364418, y: 0.5772174, z: -0.071831584}
 --- !u!1 &5552626574617382954
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +544,7 @@ GameObject:
   - component: {fileID: 6855731909788198976}
   - component: {fileID: 8983328342421674487}
   - component: {fileID: 7095451186553356581}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KitchenOven04_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,6 +598,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -550,9 +621,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8821946400497778626
 GameObject:
@@ -565,7 +638,7 @@ GameObject:
   - component: {fileID: 8719437965672065681}
   - component: {fileID: 5531926417188533553}
   - component: {fileID: 2936286148651309973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OvenRack04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,6 +688,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -636,7 +711,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

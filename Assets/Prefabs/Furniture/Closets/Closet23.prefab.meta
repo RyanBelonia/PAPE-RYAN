@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 69adb4426cb56da4fb882b18c3cc9fad
+guid: d975da809e7e41c4da5535dd74ba6c6d
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Closets/Closet23.prefab
-  uploadId: 785398

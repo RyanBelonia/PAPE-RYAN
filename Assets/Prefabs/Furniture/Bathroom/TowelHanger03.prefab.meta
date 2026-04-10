@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 045e91383c6a342449192843bb309665
+guid: 05e8b88f327afce44bacb4a4f8b54c6d
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Bathroom/TowelHanger03.prefab
-  uploadId: 785398

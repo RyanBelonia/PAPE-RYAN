@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: ab93f6cd1a7e2d24aac701affe875d89
+guid: 645d6975b253d844cb0bcf4bf4acab6a
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Chairs/Chair16.prefab
-  uploadId: 785398

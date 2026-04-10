@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 80c8563b958abc04993f8d3e79cbdc67
+guid: fb34d8aff9cc8284ebbb55d980a82c02
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Beds/Bed24.prefab
-  uploadId: 785398

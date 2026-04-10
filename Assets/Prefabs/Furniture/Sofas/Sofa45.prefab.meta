@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: ca1a134e659c0c44cabc700d04149dfc
+guid: 1260adf253c2fce44a3280b5a4d832df
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Sofas/Sofa45.prefab
-  uploadId: 785398

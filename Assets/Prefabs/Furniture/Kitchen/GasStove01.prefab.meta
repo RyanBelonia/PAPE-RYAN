@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 19039a4577cb54748807667172c13ca4
+guid: 28d9a54fbfac5454c9ebe12249bf3ea3
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/GasStove01.prefab
-  uploadId: 785398

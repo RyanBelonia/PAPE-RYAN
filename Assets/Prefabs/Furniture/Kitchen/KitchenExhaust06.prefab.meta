@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 0fda4e56379a4ab4bbf843485f7e44a3
+guid: 664a5615330646f429823874f3faf0aa
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Kitchen/KitchenExhaust06.prefab
-  uploadId: 785398

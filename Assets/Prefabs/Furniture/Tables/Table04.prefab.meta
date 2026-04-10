@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 5fdb154aa8066704e975e978a7e951da
+guid: e2c0f48c70d22ee49a2cbd00a4ed2c37
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 330002
-  packageName: Furniture Mega Pack - Free
-  packageVersion: 1.0
-  assetPath: Assets/Furniture Mega Pack/Prefabs/Tables/Table04.prefab
-  uploadId: 785398

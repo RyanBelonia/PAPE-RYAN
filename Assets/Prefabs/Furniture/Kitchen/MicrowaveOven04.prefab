@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7506333922001697766}
   - component: {fileID: 4148388330849346633}
   - component: {fileID: 354927134010527785}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MicrowaveOven04_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,6 +65,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,9 +88,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1883933685268930371
 GameObject:
@@ -99,7 +103,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5683312914858592745}
-  m_Layer: 0
+  - component: {fileID: 4660465577675216022}
+  - component: {fileID: 2073211488482738896}
+  m_Layer: 8
   m_Name: MicrowaveOven04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +128,52 @@ Transform:
   - {fileID: 7506333922001697766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4660465577675216022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883933685268930371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a583f1b2dfb9d428d5967a4353afb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Placement.PlaceableObject
+  objectType: 0
+  canMove: 1
+  canRotate: 1
+  canScale: 0
+  requiresWallSupport: 0
+  renderersToHighlight:
+  - {fileID: 354927134010527785}
+  - {fileID: 2515798767693554614}
+  - {fileID: 5691598837927098800}
+  - {fileID: 1175755950327357504}
+  - {fileID: 3307390256105945435}
+  - {fileID: 8450475720431754406}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!65 &2073211488482738896
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883933685268930371}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1546792, y: 0.68472433, z: 0.9457642}
+  m_Center: {x: 0.000000059604645, y: 0.3423621, z: -0.0756467}
 --- !u!1 &2796494131964521859
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +185,7 @@ GameObject:
   - component: {fileID: 7664680202467160647}
   - component: {fileID: 3364790473624312571}
   - component: {fileID: 2515798767693554614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MicrowaveOven04_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,6 +236,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -205,9 +259,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3098855731273861108
 GameObject:
@@ -220,7 +276,7 @@ GameObject:
   - component: {fileID: 1762270082783016547}
   - component: {fileID: 824735181164660346}
   - component: {fileID: 3307390256105945435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MicrowaveOven04_Knob02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,6 +326,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -291,9 +349,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4594614664247635365
 GameObject:
@@ -306,7 +366,7 @@ GameObject:
   - component: {fileID: 149413609610895706}
   - component: {fileID: 4637760474465129983}
   - component: {fileID: 8450475720431754406}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MicrowaveOven04_Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,6 +416,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -377,9 +439,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6712683418885037661
 GameObject:
@@ -392,7 +456,7 @@ GameObject:
   - component: {fileID: 9008713468885077486}
   - component: {fileID: 7559552954339338474}
   - component: {fileID: 5691598837927098800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MicrowaveOven04_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,6 +506,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -463,9 +529,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8432477607043967494
 GameObject:
@@ -478,7 +546,7 @@ GameObject:
   - component: {fileID: 8244899654673270089}
   - component: {fileID: 3541357358711241593}
   - component: {fileID: 1175755950327357504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MicrowaveOven04_Knob01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,6 +596,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -549,7 +619,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
