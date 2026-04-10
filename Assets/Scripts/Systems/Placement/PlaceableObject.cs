@@ -50,8 +50,7 @@ namespace InteriorPlanner.Systems.Placement
 
         public void Select()
         {
-            if (isSelected)
-                return;
+            if (isSelected) return;
 
             isSelected = true;
             ApplySelectionVisual(true);
@@ -59,8 +58,7 @@ namespace InteriorPlanner.Systems.Placement
 
         public void Deselect()
         {
-            if (!isSelected)
-                return;
+            if (!isSelected) return;
 
             isSelected = false;
             ApplySelectionVisual(false);
@@ -68,14 +66,12 @@ namespace InteriorPlanner.Systems.Placement
 
         private void ApplySelectionVisual(bool selected)
         {
-            if (renderersToHighlight == null || renderersToHighlight.Length == 0)
-                return;
+            if (renderersToHighlight == null || renderersToHighlight.Length == 0) return;
 
             for (int i = 0; i < renderersToHighlight.Length; i++)
             {
                 Renderer rend = renderersToHighlight[i];
-                if (rend == null)
-                    continue;
+                if (rend == null) continue;
 
                 rend.GetPropertyBlock(propertyBlock);
 

@@ -7,43 +7,47 @@ namespace InteriorPlanner.Systems.Placement
     public class ObjectMover : MonoBehaviour
     {
         [SerializeField] private UnityEngine.Camera mainCamera;
-        [SerializeField] private LayerMask floorLayerMask; // TEM DE ESTAR APONTADO PARA "Ground"
+        [SerializeField] private LayerMask floorLayerMask; 
         [SerializeField] private SelectionManager selectionManager;
+        
+        [Header("Rotation Settings")]
+        [SerializeField] private float rotationSpeedScroll = 15f; 
+        [SerializeField] private float rotationSpeedKey = 45f;    
+
+        [Header("Placement Settings")]
+        [SerializeField] private bool useGridSnap = false; // Liga no Inspector para usar grelha!
+        [SerializeField] private float gridSize = 0.5f; // Tamanho da grelha (ex: 0.5 metros)
+        [SerializeField] private bool useSmoothMovement = true; // Deixa o movimento suave
+        [SerializeField] private float smoothSpeed = 15f;
 
         private PlaceableObject currentObject;
         private bool isDragging;
-        private Vector3 dragOffset; // O segredo para o objeto não "teleportar"
+        private Vector3 dragOffset; 
 
-        // Usamos LateUpdate para dar tempo ao SelectionManager de selecionar o objeto no Update()
         private void LateUpdate()
         {
-            if (Mouse.current == null || mainCamera == null || selectionManager == null)
+            if (Mouse.current == null || Keyboard.current == null || mainCamera == null || selectionManager == null)
                 return;
 
-            // 1. COMEÇAR DRAG (Momento do Clique)
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 if (IsPointerOverUI()) return;
 
                 currentObject = selectionManager.GetSelectedObject();
 
-                // Só começa o drag se clicámos num objeto válido e que se pode mover
                 if (currentObject != null && currentObject.CanMove)
                 {
                     Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
                     
-                    // Dispara o raio contra o chão para saber onde o rato tocou inicialmente
                     if (Physics.Raycast(ray, out RaycastHit hit, 500f, floorLayerMask))
                     {
-                        // Calcula a diferença entre a posição do objeto e onde o rato bateu no chão
                         dragOffset = currentObject.transform.position - hit.point;
-                        dragOffset.y = 0; // Ignoramos o Y para a altura não se descontrolar
+                        dragOffset.y = 0; 
                         isDragging = true;
                     }
                 }
             }
 
-            // 2. DURANTE DRAG (Segurar o botão)
             if (isDragging && Mouse.current.leftButton.isPressed)
             {
                 if (currentObject == null)
@@ -53,9 +57,9 @@ namespace InteriorPlanner.Systems.Placement
                 }
 
                 MoveObjectWithMouse();
+                RotateObjectWithInput();
             }
 
-            // 3. TERMINAR DRAG (Largar o botão)
             if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
                 isDragging = false;
@@ -67,16 +71,50 @@ namespace InteriorPlanner.Systems.Placement
         {
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            // Só move se o rato estiver a apontar para o chão
             if (Physics.Raycast(ray, out RaycastHit hit, 500f, floorLayerMask))
             {
-                // A nova posição é onde o rato está + a distância inicial (Offset)
+                // Posição base (Rato + Offset)
                 Vector3 targetPosition = hit.point + dragOffset;
-
-                // Força a altura original do objeto para ele não afundar no chão
                 targetPosition.y = currentObject.transform.position.y;
 
-                currentObject.transform.position = targetPosition;
+                // --- SISTEMA DE GRELHA (GRID SNAP) ---
+                if (useGridSnap)
+                {
+                    targetPosition.x = Mathf.Round(targetPosition.x / gridSize) * gridSize;
+                    targetPosition.z = Mathf.Round(targetPosition.z / gridSize) * gridSize;
+                }
+
+                // --- SISTEMA DE MOVIMENTO ---
+                if (useSmoothMovement && !useGridSnap) 
+                {
+                    // Movimento suave (escorrega até ao rato)
+                    currentObject.transform.position = Vector3.Lerp(currentObject.transform.position, targetPosition, Time.deltaTime * smoothSpeed);
+                }
+                else
+                {
+                    // Movimento instantâneo (obrigatório se estivermos a usar a grelha)
+                    currentObject.transform.position = targetPosition;
+                }
+            }
+        }
+
+        private void RotateObjectWithInput()
+        {
+            if (!currentObject.CanRotate) return; 
+
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                currentObject.transform.Rotate(Vector3.up, rotationSpeedKey);
+            }
+
+            float scrollValue = Mouse.current.scroll.y.ReadValue();
+            if (scrollValue > 0)
+            {
+                currentObject.transform.Rotate(Vector3.up, rotationSpeedScroll);
+            }
+            else if (scrollValue < 0)
+            {
+                currentObject.transform.Rotate(Vector3.up, -rotationSpeedScroll);
             }
         }
 
