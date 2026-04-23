@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using InteriorPlanner.Core; // Adicionado para acessar o AppManager
+using InteriorPlanner.Data; // Adicionado para acessar o RoomData
 
 namespace InteriorPlanner.Systems.Placement
 {
@@ -15,9 +17,9 @@ namespace InteriorPlanner.Systems.Placement
         [SerializeField] private float rotationSpeedKey = 45f;    
 
         [Header("Placement Settings")]
-        [SerializeField] private bool useGridSnap = false; // Liga no Inspector para usar grelha!
-        [SerializeField] private float gridSize = 0.5f; // Tamanho da grelha (ex: 0.5 metros)
-        [SerializeField] private bool useSmoothMovement = true; // Deixa o movimento suave
+        [SerializeField] private bool useGridSnap = false; 
+        [SerializeField] private float gridSize = 0.5f; 
+        [SerializeField] private bool useSmoothMovement = true; 
         [SerializeField] private float smoothSpeed = 15f;
 
         private PlaceableObject currentObject;
@@ -73,29 +75,55 @@ namespace InteriorPlanner.Systems.Placement
 
             if (Physics.Raycast(ray, out RaycastHit hit, 500f, floorLayerMask))
             {
-                // Posição base (Rato + Offset)
                 Vector3 targetPosition = hit.point + dragOffset;
                 targetPosition.y = currentObject.transform.position.y;
 
-                // --- SISTEMA DE GRELHA (GRID SNAP) ---
                 if (useGridSnap)
                 {
                     targetPosition.x = Mathf.Round(targetPosition.x / gridSize) * gridSize;
                     targetPosition.z = Mathf.Round(targetPosition.z / gridSize) * gridSize;
                 }
 
-                // --- SISTEMA DE MOVIMENTO ---
+                // --- NOVO: RESTRINGIR AOS LIMITES DA SALA ---
+                targetPosition = ClampPositionToRoom(targetPosition);
+
                 if (useSmoothMovement && !useGridSnap) 
                 {
-                    // Movimento suave (escorrega até ao rato)
                     currentObject.transform.position = Vector3.Lerp(currentObject.transform.position, targetPosition, Time.deltaTime * smoothSpeed);
                 }
                 else
                 {
-                    // Movimento instantâneo (obrigatório se estivermos a usar a grelha)
                     currentObject.transform.position = targetPosition;
                 }
             }
+        }
+
+        // --- NOVA FUNÇÃO ---
+        private Vector3 ClampPositionToRoom(Vector3 targetPos)
+        {
+            if (AppManager.Instance == null || !AppManager.Instance.ProjectSession.HasProjectLoaded())
+                return targetPos;
+
+            RoomData room = AppManager.Instance.ProjectSession.CurrentProject.Room;
+            if (room == null) return targetPos;
+
+            // Pega o tamanho real do móvel rodado no mundo
+            Collider col = currentObject.GetComponentInChildren<Collider>();
+            float extentsX = col != null ? col.bounds.extents.x : 0f;
+            float extentsZ = col != null ? col.bounds.extents.z : 0f;
+
+            // Calcula as paredes baseando-se no tamanho da sala e desconta metade do móvel
+            float minX = (-room.Width / 2f) + extentsX;
+            float maxX = (room.Width / 2f) - extentsX;
+            
+            float minZ = (-room.Length / 2f) + extentsZ;
+            float maxZ = (room.Length / 2f) - extentsZ;
+
+            // Aplica a barreira invisível
+            targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
+            targetPos.z = Mathf.Clamp(targetPos.z, minZ, maxZ);
+
+            return targetPos;
         }
 
         private void RotateObjectWithInput()
