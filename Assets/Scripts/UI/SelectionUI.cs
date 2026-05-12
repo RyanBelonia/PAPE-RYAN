@@ -59,7 +59,7 @@ namespace InteriorPlanner.Systems.UI
             scaleZ.onEndEdit.AddListener(val => UpdateObjectTransform());
         }
 
-        private void Update()
+        private void Update()   
         {
             if (selectionManager == null || uiPanel == null) return;
 
