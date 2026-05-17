@@ -56,6 +56,7 @@ MonoBehaviour:
   - {fileID: 9019719985355945517}
   - {fileID: 5434118336223853943}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
 --- !u!65 &14013649189878765
 BoxCollider:
   m_ObjectHideFlags: 0

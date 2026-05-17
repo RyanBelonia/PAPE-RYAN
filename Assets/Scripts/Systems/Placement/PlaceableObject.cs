@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace InteriorPlanner.Systems.Placement
 {
@@ -17,8 +18,15 @@ namespace InteriorPlanner.Systems.Placement
         [SerializeField] private Renderer[] renderersToHighlight;
         [SerializeField] private Color selectedColor = Color.yellow;
 
+        [Header("Validation Visual")]
+        [SerializeField] private Material invalidMaterial; // NOVO: Arrasta o material vermelho para aqui!
+
         private bool isSelected;
+        private bool isValidPosition = true;
         private MaterialPropertyBlock propertyBlock;
+        
+        // Guarda os materiais originais para podermos voltar a eles depois do vermelho
+        private Dictionary<Renderer, Material[]> originalMaterials = new Dictionary<Renderer, Material[]>();
 
         public PlaceableObjectType ObjectType => objectType;
         public bool CanMove => canMove;
@@ -26,7 +34,9 @@ namespace InteriorPlanner.Systems.Placement
         public bool CanScale => canScale;
         public bool RequiresWallSupport => requiresWallSupport;
         public bool IsSelected => isSelected;
+        public bool IsValidPosition => isValidPosition; 
 
+        // A tua função original intacta!
         public void Configure(
             PlaceableObjectType type,
             bool move,
@@ -46,41 +56,83 @@ namespace InteriorPlanner.Systems.Placement
         private void Awake()
         {
             propertyBlock = new MaterialPropertyBlock();
+            
+            // Quando o jogo começa, guardamos o aspeto original de todas as almofadas e madeiras
+            if (renderersToHighlight != null)
+            {
+                foreach (var rend in renderersToHighlight)
+                {
+                    if (rend != null)
+                    {
+                        originalMaterials[rend] = rend.materials;
+                    }
+                }
+            }
         }
 
         public void Select()
         {
             if (isSelected) return;
-
             isSelected = true;
-            ApplySelectionVisual(true);
+            UpdateVisualState();
         }
 
         public void Deselect()
         {
             if (!isSelected) return;
-
             isSelected = false;
-            ApplySelectionVisual(false);
+            UpdateVisualState();
         }
 
-        private void ApplySelectionVisual(bool selected)
+        // NOVA: Função chamada pelo ObjectMover quando o objeto bate noutro
+        public void SetValidState(bool isValid)
         {
-            if (renderersToHighlight == null || renderersToHighlight.Length == 0) return;
+            if (isValidPosition == isValid) return;
+            isValidPosition = isValid;
+            UpdateVisualState();
+        }
 
-            for (int i = 0; i < renderersToHighlight.Length; i++)
+        // NOVA: O "Cérebro" que decide que cor o móvel deve ter num dado momento
+        private void UpdateVisualState()
+        {
+            if (renderersToHighlight == null) return;
+
+            foreach (var rend in renderersToHighlight)
             {
-                Renderer rend = renderersToHighlight[i];
                 if (rend == null) continue;
 
-                rend.GetPropertyBlock(propertyBlock);
-
-                if (selected)
-                    propertyBlock.SetColor("_BaseColor", selectedColor);
-                else
+                if (!isValidPosition && invalidMaterial != null)
+                {
+                    // 1. ESTADO INVÁLIDO (Bateu em algo) -> Troca tudo pelo material Vermelho
+                    Material[] badMats = new Material[rend.materials.Length];
+                    for (int i = 0; i < badMats.Length; i++) badMats[i] = invalidMaterial;
+                    rend.materials = badMats;
+                    
+                    // Limpa o amarelo se estiver selecionado para não misturar cores
+                    rend.GetPropertyBlock(propertyBlock);
                     propertyBlock.Clear();
+                    rend.SetPropertyBlock(propertyBlock);
+                }
+                else
+                {
+                    // 2. ESTADO VÁLIDO -> Restaura os materiais originais do móvel
+                    if (originalMaterials.ContainsKey(rend))
+                    {
+                        rend.materials = originalMaterials[rend];
+                    }
 
-                rend.SetPropertyBlock(propertyBlock);
+                    // 3. ESTADO SELECIONADO -> Se além de válido estiver clicado, aplica o teu amarelo!
+                    rend.GetPropertyBlock(propertyBlock);
+                    if (isSelected)
+                    {
+                        propertyBlock.SetColor("_BaseColor", selectedColor);
+                    }
+                    else
+                    {
+                        propertyBlock.Clear();
+                    }
+                    rend.SetPropertyBlock(propertyBlock);
+                }
             }
         }
     }

@@ -6240,10 +6240,13 @@ MonoBehaviour:
   floorLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 768
   selectionManager: {fileID: 1784079730}
   rotationSpeedScroll: 15
   rotationSpeedKey: 45
-  useGridSnap: 1
+  useGridSnap: 0
   gridSize: 0.5
   useSmoothMovement: 0
   smoothSpeed: 15

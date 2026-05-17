@@ -142,7 +142,7 @@ MonoBehaviour:
   objectType: 0
   canMove: 1
   canRotate: 1
-  canScale: 0
+  canScale: 1
   requiresWallSupport: 0
   renderersToHighlight:
   - {fileID: 7813238341377373836}
@@ -150,6 +150,7 @@ MonoBehaviour:
   - {fileID: 3104499613682738881}
   - {fileID: 7260272863775944284}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
 --- !u!65 &6825289476379247532
 BoxCollider:
   m_ObjectHideFlags: 0

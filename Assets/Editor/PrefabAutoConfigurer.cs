@@ -42,7 +42,7 @@ public class PrefabAutoConfigurer : EditorWindow
                 PlaceableObjectType.Furniture,
                 true,  // canMove
                 true,  // canRotate
-                false, // canScale
+                true, // canScale
                 false, // requiresWallSupport
                 allRenderers.ToArray()
             );

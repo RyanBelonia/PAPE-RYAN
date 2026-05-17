@@ -26,17 +26,17 @@ namespace InteriorPlanner.Systems.UI
         [SerializeField] private TMP_InputField rotY;
         [SerializeField] private TMP_InputField rotZ;
 
-        [Header("Scale Inputs")]
+        [Header("Size Inputs (Meters)")]
         [SerializeField] private TMP_InputField scaleX;
         [SerializeField] private TMP_InputField scaleY;
         [SerializeField] private TMP_InputField scaleZ;
 
         private PlaceableObject currentObject;
 
-        // Variáveis para saber quando o objeto foi movido pelo rato e não pela UI
         private Vector3 lastKnownPosition;
         private Vector3 lastKnownRotation;
-        private Vector3 lastKnownScale;
+        private Vector3 lastKnownSizeInMeters; // Agora guarda o tamanho em METROS
+        private Vector3 objectBaseSize; // O tamanho original do modelo 3D
 
         private void Start()
         {
@@ -45,7 +45,6 @@ namespace InteriorPlanner.Systems.UI
             if (closeButton) closeButton.onClick.AddListener(Deselect);
             if (deleteButton) deleteButton.onClick.AddListener(DeleteObject);
 
-            // Adiciona os "Ouvintes" para quando o utilizador acaba de digitar (OnEndEdit)
             posX.onEndEdit.AddListener(val => UpdateObjectTransform());
             posY.onEndEdit.AddListener(val => UpdateObjectTransform());
             posZ.onEndEdit.AddListener(val => UpdateObjectTransform());
@@ -59,13 +58,12 @@ namespace InteriorPlanner.Systems.UI
             scaleZ.onEndEdit.AddListener(val => UpdateObjectTransform());
         }
 
-        private void Update()   
+        private void Update()
         {
             if (selectionManager == null || uiPanel == null) return;
 
             PlaceableObject selected = selectionManager.GetSelectedObject();
 
-            // 1. Mudança de Seleção (Clicou num móvel novo ou clicou no vazio)
             if (selected != currentObject)
             {
                 currentObject = selected;
@@ -73,7 +71,6 @@ namespace InteriorPlanner.Systems.UI
                 else HideUI();
             }
 
-            // 2. Atualização em Tempo Real (Bidirecional)
             if (currentObject != null)
             {
                 CheckForExternalChanges();
@@ -85,7 +82,10 @@ namespace InteriorPlanner.Systems.UI
             uiPanel.SetActive(true);
             if (objectNameText) objectNameText.text = currentObject.name.Replace("(Clone)", "").Trim();
 
-            // Bloqueia ou desbloqueia as caixas de texto consoante as regras do móvel
+            // Descobre o tamanho base original do modelo usando o BoxCollider
+            BoxCollider boxCol = currentObject.GetComponent<BoxCollider>();
+            objectBaseSize = boxCol != null ? boxCol.size : Vector3.one;
+
             bool canMove = currentObject.CanMove;
             posX.interactable = canMove;
             posY.interactable = canMove;
@@ -101,7 +101,6 @@ namespace InteriorPlanner.Systems.UI
             scaleY.interactable = canScale;
             scaleZ.interactable = canScale;
 
-            // Força a primeira leitura dos valores
             ForceReadValues();
         }
 
@@ -114,17 +113,21 @@ namespace InteriorPlanner.Systems.UI
         {
             lastKnownPosition = currentObject.transform.position;
             lastKnownRotation = currentObject.transform.eulerAngles;
-            lastKnownScale = currentObject.transform.localScale;
+            
+            // Calcula os Metros = Tamanho Original * Multiplicador de Escala
+            lastKnownSizeInMeters = new Vector3(
+                objectBaseSize.x * currentObject.transform.localScale.x,
+                objectBaseSize.y * currentObject.transform.localScale.y,
+                objectBaseSize.z * currentObject.transform.localScale.z
+            );
 
             UpdateUIFields();
         }
 
-        // Verifica se o móvel foi arrastado pelo rato (ObjectMover)
         private void CheckForExternalChanges()
         {
             Transform objT = currentObject.transform;
 
-            // Se a posição mudou no mundo E o utilizador não está a escrever no InputField
             if (objT.position != lastKnownPosition && !posX.isFocused && !posY.isFocused && !posZ.isFocused)
             {
                 lastKnownPosition = objT.position;
@@ -141,12 +144,19 @@ namespace InteriorPlanner.Systems.UI
                 SetInputTextWithoutNotify(rotZ, lastKnownRotation.z);
             }
 
-            if (objT.localScale != lastKnownScale && !scaleX.isFocused && !scaleY.isFocused && !scaleZ.isFocused)
+            // Verifica se a escala mudou de fora
+            Vector3 currentSizeMeters = new Vector3(
+                objectBaseSize.x * objT.localScale.x,
+                objectBaseSize.y * objT.localScale.y,
+                objectBaseSize.z * objT.localScale.z
+            );
+
+            if (currentSizeMeters != lastKnownSizeInMeters && !scaleX.isFocused && !scaleY.isFocused && !scaleZ.isFocused)
             {
-                lastKnownScale = objT.localScale;
-                SetInputTextWithoutNotify(scaleX, lastKnownScale.x);
-                SetInputTextWithoutNotify(scaleY, lastKnownScale.y);
-                SetInputTextWithoutNotify(scaleZ, lastKnownScale.z);
+                lastKnownSizeInMeters = currentSizeMeters;
+                SetInputTextWithoutNotify(scaleX, lastKnownSizeInMeters.x);
+                SetInputTextWithoutNotify(scaleY, lastKnownSizeInMeters.y);
+                SetInputTextWithoutNotify(scaleZ, lastKnownSizeInMeters.z);
             }
         }
 
@@ -160,45 +170,53 @@ namespace InteriorPlanner.Systems.UI
             SetInputTextWithoutNotify(rotY, lastKnownRotation.y);
             SetInputTextWithoutNotify(rotZ, lastKnownRotation.z);
 
-            SetInputTextWithoutNotify(scaleX, lastKnownScale.x);
-            SetInputTextWithoutNotify(scaleY, lastKnownScale.y);
-            SetInputTextWithoutNotify(scaleZ, lastKnownScale.z);
+            SetInputTextWithoutNotify(scaleX, lastKnownSizeInMeters.x);
+            SetInputTextWithoutNotify(scaleY, lastKnownSizeInMeters.y);
+            SetInputTextWithoutNotify(scaleZ, lastKnownSizeInMeters.z);
         }
 
-        // Função de segurança para não disparar eventos em loop
         private void SetInputTextWithoutNotify(TMP_InputField input, float value)
         {
             if (input == null) return;
-            input.SetTextWithoutNotify(value.ToString("F2")); // "F2" arredonda para 2 casas decimais visualmente
+            input.SetTextWithoutNotify(value.ToString("F2")); 
         }
 
-        // --- CHAMADO QUANDO O UTILIZADOR DIGITA UM NÚMERO ---
         private void UpdateObjectTransform()
         {
             if (currentObject == null) return;
 
-            // Lemos os textos e convertemos para números. Se o utilizador escrever letras, assume 0.
-            float px = float.TryParse(posX.text, out float _px) ? _px : currentObject.transform.position.x;
-            float py = float.TryParse(posY.text, out float _py) ? _py : currentObject.transform.position.y;
-            float pz = float.TryParse(posZ.text, out float _pz) ? _pz : currentObject.transform.position.z;
+            // POSIÇÃO
+            float px = float.TryParse(posX.text, out float _px) ? _px : lastKnownPosition.x;
+            float py = float.TryParse(posY.text, out float _py) ? _py : lastKnownPosition.y;
+            float pz = float.TryParse(posZ.text, out float _pz) ? _pz : lastKnownPosition.z;
 
-            float rx = float.TryParse(rotX.text, out float _rx) ? _rx : currentObject.transform.eulerAngles.x;
-            float ry = float.TryParse(rotY.text, out float _ry) ? _ry : currentObject.transform.eulerAngles.y;
-            float rz = float.TryParse(rotZ.text, out float _rz) ? _rz : currentObject.transform.eulerAngles.z;
+            // ROTAÇÃO
+            float rx = float.TryParse(rotX.text, out float _rx) ? _rx : lastKnownRotation.x;
+            float ry = float.TryParse(rotY.text, out float _ry) ? _ry : lastKnownRotation.y;
+            float rz = float.TryParse(rotZ.text, out float _rz) ? _rz : lastKnownRotation.z;
 
-            float sx = float.TryParse(scaleX.text, out float _sx) ? _sx : currentObject.transform.localScale.x;
-            float sy = float.TryParse(scaleY.text, out float _sy) ? _sy : currentObject.transform.localScale.y;
-            float sz = float.TryParse(scaleZ.text, out float _sz) ? _sz : currentObject.transform.localScale.z;
+            // TAMANHO EM METROS
+            float sizeX = float.TryParse(scaleX.text, out float _sx) ? _sx : lastKnownSizeInMeters.x;
+            float sizeY = float.TryParse(scaleY.text, out float _sy) ? _sy : lastKnownSizeInMeters.y;
+            float sizeZ = float.TryParse(scaleZ.text, out float _sz) ? _sz : lastKnownSizeInMeters.z;
 
-            // Aplica ao objeto
+            // Limita o tamanho para não desaparecer (min: 10cm) nem ficar infinito (max: 15 metros)
+            sizeX = Mathf.Clamp(sizeX, 0.1f, 15f);
+            sizeY = Mathf.Clamp(sizeY, 0.1f, 15f);
+            sizeZ = Mathf.Clamp(sizeZ, 0.1f, 15f);
+
+            // Converte os metros de volta para Escala (Multiplicador)
+            float newScaleX = objectBaseSize.x > 0 ? sizeX / objectBaseSize.x : 1f;
+            float newScaleY = objectBaseSize.y > 0 ? sizeY / objectBaseSize.y : 1f;
+            float newScaleZ = objectBaseSize.z > 0 ? sizeZ / objectBaseSize.z : 1f;
+
+            // APLICA AO OBJETO
             if (currentObject.CanMove) currentObject.transform.position = new Vector3(px, py, pz);
             if (currentObject.CanRotate) currentObject.transform.eulerAngles = new Vector3(rx, ry, rz);
-            if (currentObject.CanScale) currentObject.transform.localScale = new Vector3(sx, sy, sz);
+            if (currentObject.CanScale) currentObject.transform.localScale = new Vector3(newScaleX, newScaleY, newScaleZ);
 
-            // Atualiza a nossa memória para não haver conflitos
-            lastKnownPosition = currentObject.transform.position;
-            lastKnownRotation = currentObject.transform.eulerAngles;
-            lastKnownScale = currentObject.transform.localScale;
+            // Atualiza os valores conhecidos
+            ForceReadValues();
         }
 
         private void Deselect()
