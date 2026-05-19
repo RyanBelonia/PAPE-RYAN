@@ -4501,6 +4501,143 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752924916}
   m_CullTransparentMesh: 1
+--- !u!1 &770213255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770213256}
+  - component: {fileID: 770213258}
+  - component: {fileID: 770213257}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &770213256
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770213255}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976615137}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &770213257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770213255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Doors
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &770213258
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770213255}
+  m_CullTransparentMesh: 1
 --- !u!1 &787996699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,6 +4932,143 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839354850}
+  m_CullTransparentMesh: 1
+--- !u!1 &948895691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948895692}
+  - component: {fileID: 948895694}
+  - component: {fileID: 948895693}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &948895692
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948895691}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1392294481}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &948895693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948895691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Janelas
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &948895694
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948895691}
   m_CullTransparentMesh: 1
 --- !u!1 &987993437
 GameObject:
@@ -5571,6 +5845,8 @@ RectTransform:
   - {fileID: 107050620}
   - {fileID: 1284253396}
   - {fileID: 1155030311}
+  - {fileID: 1392294481}
+  - {fileID: 1976615137}
   m_Father: {fileID: 572579319}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6242,7 +6518,10 @@ MonoBehaviour:
     m_Bits: 512
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 0
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   selectionManager: {fileID: 1784079730}
   rotationSpeedScroll: 15
   rotationSpeedKey: 45
@@ -7294,6 +7573,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379217241}
+  m_CullTransparentMesh: 1
+--- !u!1 &1392294480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392294481}
+  - component: {fileID: 1392294484}
+  - component: {fileID: 1392294483}
+  - component: {fileID: 1392294482}
+  m_Layer: 5
+  m_Name: WindowsButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1392294481
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392294480}
+  m_LocalRotation: {x: -0, y: -0, z: -7.275958e-12, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 948895692}
+  m_Father: {fileID: 1094469630}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1392294482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392294480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1392294483}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1916147176}
+        m_TargetAssemblyTypeName: InteriorPlanner.Systems.Furniture.FurnitureLibraryUI,
+          Assembly-CSharp
+        m_MethodName: FilterByCategoryInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1392294483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392294480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1392294484
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392294480}
   m_CullTransparentMesh: 1
 --- !u!1 &1420983581
 GameObject:
@@ -9683,7 +10096,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 685331543}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9980,8 +10393,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.Furniture.FurnitureLibraryUI
   furnitureContent: {fileID: 1659085100}
   furnitureButtonPrefab: {fileID: 2046923744965334960, guid: 4fee7c3d0629e3142a4cad6724a0c203, type: 3}
-  prefabsRootFolder: Assets/Prefabs/Furniture
-  iconsRootFolder: Assets/Art/Icons/Furniture
+  prefabsRootFolders:
+  - Assets/Prefabs/Furniture
+  - Assets/Prefabs/Structural
+  iconsRootFolders:
+  - Assets/Art/Icons/Furniture
+  - Assets/Art/Icons/Structural
   furnitureItems:
   - DisplayName: BathroomVanity01
     Category: 0
@@ -10779,6 +11196,206 @@ MonoBehaviour:
     Category: 3
     Prefab: {fileID: 2507369420637271361, guid: 0cff867805ce5674ea107c30b8d97ce6, type: 3}
     Thumbnail: {fileID: 21300000, guid: 2edf201b1ae772248bf50129c29f8508, type: 3}
+  - DisplayName: Cushion01
+    Category: 4
+    Prefab: {fileID: 438367841672139671, guid: 86fd55ad3cb938849acbf623bd9af12f, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 74829b2c771703e4a9d0cfc083b49726, type: 3}
+  - DisplayName: Cushion02
+    Category: 4
+    Prefab: {fileID: 338472643615842180, guid: 823f75f6cbc57424a9b54b9e17c257bc, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 23f01804085798448977b2a0a8c98da8, type: 3}
+  - DisplayName: Cushion03
+    Category: 4
+    Prefab: {fileID: 1814492482002144348, guid: 472403c16ee9979479789eda00f5f80f, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 1405d49f446be234482aa5116df2947b, type: 3}
+  - DisplayName: Cushion04
+    Category: 4
+    Prefab: {fileID: 3814702040518814779, guid: 08f450dd3269747429385063b6c344a0, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 89b7c470e9e650c439c56883f7d0d0ba, type: 3}
+  - DisplayName: Cushion05
+    Category: 4
+    Prefab: {fileID: 33829128087868068, guid: d6d82a71dbff9954e929b6b56bdfe9c2, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 465d4d6f60887114a86662e5b3288fe5, type: 3}
+  - DisplayName: Cushion06
+    Category: 4
+    Prefab: {fileID: 4366741766387490717, guid: 93276ae8f27ee494f831b2681e09a30b, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 64e1a70784c7c9744a9066956c412af9, type: 3}
+  - DisplayName: Cushion07
+    Category: 4
+    Prefab: {fileID: 6627133703475748469, guid: fd389b1ccb8ff684d8d65e033492d8ea, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 95a20565a2d45154ab46be81a0f65f5d, type: 3}
+  - DisplayName: Cushion08
+    Category: 4
+    Prefab: {fileID: 7773509211231317048, guid: cff43dd99bee38d48931ca05e04bd9eb, type: 3}
+    Thumbnail: {fileID: 21300000, guid: bcc55105a55be6a4da0c7774c7b1eeea, type: 3}
+  - DisplayName: Cushion09
+    Category: 4
+    Prefab: {fileID: 7451519395586146465, guid: 480a20b7a08e3cf49bee597311cb2033, type: 3}
+    Thumbnail: {fileID: 21300000, guid: b62757e5233073c4b9de7e0a21a376f6, type: 3}
+  - DisplayName: Cushion10
+    Category: 4
+    Prefab: {fileID: 4552000629984244421, guid: 4f8e15af2e0aef04e9b96e298b5068bd, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 501f8ff8cbdd8a24eb52e619d6b2469f, type: 3}
+  - DisplayName: Cushion11
+    Category: 4
+    Prefab: {fileID: 8290811731733150196, guid: f679f79031ef536418395061223a7c41, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 93aeb8bd89bdc374193b167b8a10300f, type: 3}
+  - DisplayName: Cushion12
+    Category: 4
+    Prefab: {fileID: 6439429014548364418, guid: f81493c154295e94fa19f50cdc9eb277, type: 3}
+    Thumbnail: {fileID: 21300000, guid: b9377ee1b43c6fc49a492b6ccd7ce892, type: 3}
+  - DisplayName: Cushion13
+    Category: 4
+    Prefab: {fileID: 7525941278556887841, guid: 407abdaa1a51e5840b1210ab79f7c8d0, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 33a26b76c191a2548981b117311d66b0, type: 3}
+  - DisplayName: Cushion14
+    Category: 4
+    Prefab: {fileID: 3897402399979679679, guid: ac688a4c7b2c986459945f2a8270f2df, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 631a2da579907a849b774d54a2631144, type: 3}
+  - DisplayName: Cushion15
+    Category: 4
+    Prefab: {fileID: 7304507971437649478, guid: 945e0f1bcef8feb4e9eec53f1cb607f1, type: 3}
+    Thumbnail: {fileID: 21300000, guid: c0ccf46fe9e3cf34985a4ca3ba0114ae, type: 3}
+  - DisplayName: Cushion16
+    Category: 4
+    Prefab: {fileID: 3276695143925924127, guid: d78cfbca5163be04c9113d82c44fa2ee, type: 3}
+    Thumbnail: {fileID: 21300000, guid: ab8daa520ac13b146a35b55f0f69d1e6, type: 3}
+  - DisplayName: Cushion17
+    Category: 4
+    Prefab: {fileID: 2856546590301344187, guid: ccdc94710c352a143a295517c3ca8052, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 166119b944f36ca47904ecbc99c2bdb0, type: 3}
+  - DisplayName: Cushion18
+    Category: 4
+    Prefab: {fileID: 6182647185566817428, guid: b2c7f714128abf943bb039e3d78fc7ce, type: 3}
+    Thumbnail: {fileID: 21300000, guid: ea91f8a70216a5f4caf58aacaaf63703, type: 3}
+  - DisplayName: Cushion19
+    Category: 4
+    Prefab: {fileID: 1772722472901266567, guid: e5606c76e54a41c4c85f81dc224c5fdf, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 9970a39a17615da4095dc82d50c12fe7, type: 3}
+  - DisplayName: Cushion20
+    Category: 4
+    Prefab: {fileID: 6835460174633859875, guid: c035f835e0ef892458752863b82ca50a, type: 3}
+    Thumbnail: {fileID: 21300000, guid: d362b37deb15e1643919a5b8de2c044f, type: 3}
+  - DisplayName: Cushion21
+    Category: 4
+    Prefab: {fileID: 3172205649268141462, guid: 7d25af82183d0c34c852e523f6e08ceb, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 2bd01661a37badd4cbf4ef710e681e51, type: 3}
+  - DisplayName: Cushion22
+    Category: 4
+    Prefab: {fileID: 6293159321249214693, guid: ac7823b93a455c748ab7667b8a1405c8, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 0862a0d687d5d30458b5e9a2ba95e8a9, type: 3}
+  - DisplayName: Cushion23
+    Category: 4
+    Prefab: {fileID: 1772603216858177770, guid: 2536a5bf6f4a2d54d96e2bdbf7b6595e, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 84a0fab6cd786b7499472bc9a683bfe5, type: 3}
+  - DisplayName: Cushion24
+    Category: 4
+    Prefab: {fileID: 9051868061435698997, guid: 01ef3d74d84c9554995c1def59a4cdb9, type: 3}
+    Thumbnail: {fileID: 21300000, guid: cfb2bf3177e451e4cb4821af70f20698, type: 3}
+  - DisplayName: Cushion25
+    Category: 4
+    Prefab: {fileID: 6306769455649815834, guid: b930dc31c91f6a7429b133946c65216a, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 9c0cb56853a86284292ecbf0157a5ad3, type: 3}
+  - DisplayName: Cushion26
+    Category: 4
+    Prefab: {fileID: 6940282559776684765, guid: dee24d178a114804bb4a1d49dfba2ed3, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 84110fbf8b704bf45a1fc9e62b35702f, type: 3}
+  - DisplayName: Cushion27
+    Category: 4
+    Prefab: {fileID: 1168981610615930868, guid: 0258106e1cc13f049b5eda536b474797, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 662232e340566454f8bfafe66b50a1ef, type: 3}
+  - DisplayName: Cushion28
+    Category: 4
+    Prefab: {fileID: 2964173958009806724, guid: af4ab0252bd9def42a3b3ed595faeb9d, type: 3}
+    Thumbnail: {fileID: 21300000, guid: a5c478654cc96824a90277f626e89e0a, type: 3}
+  - DisplayName: Cushion29
+    Category: 4
+    Prefab: {fileID: 5155577052761942121, guid: d06b5ab638a839145be0f1c869f7f88b, type: 3}
+    Thumbnail: {fileID: 21300000, guid: dc0f6a8c7d7e4ae499905b2d48e78714, type: 3}
+  - DisplayName: Cushion30
+    Category: 4
+    Prefab: {fileID: 3739167384462927551, guid: c0ba771d73be24d409702440c09a0c4e, type: 3}
+    Thumbnail: {fileID: 21300000, guid: e2105f14c6c527c41bb2bcb81d9518a4, type: 3}
+  - DisplayName: Cushion31
+    Category: 4
+    Prefab: {fileID: 4686875943607946913, guid: d50e0873d02bc5e49913cc5cee5d10a2, type: 3}
+    Thumbnail: {fileID: 21300000, guid: d4845c7d932c2444795a27b6e70e4dc2, type: 3}
+  - DisplayName: Cushion32
+    Category: 4
+    Prefab: {fileID: 3092290359180339073, guid: 8a0a4f1dab339ac438237bba363dfc1f, type: 3}
+    Thumbnail: {fileID: 21300000, guid: a0c15bd9f0fc76a41858a4906dde2598, type: 3}
+  - DisplayName: Cushion33
+    Category: 4
+    Prefab: {fileID: 6456450367964416685, guid: 4d199be6237e13249a93b366aa5ecc92, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 363bd7dbfb348b145bb60ef1773d1bc9, type: 3}
+  - DisplayName: Cushion34
+    Category: 4
+    Prefab: {fileID: 7077593861149022607, guid: e3d111692ddaba84ab5d32757edbdc4b, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 45310619117fa014181836b53e40560e, type: 3}
+  - DisplayName: Cushion35
+    Category: 4
+    Prefab: {fileID: 7811554586052750377, guid: 87877a6af7213fa4397e262deb786ac2, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 6a7b51a49cb0c154590e3472cefef543, type: 3}
+  - DisplayName: Cushion36
+    Category: 4
+    Prefab: {fileID: 6784482920142719760, guid: f9e1ce09828e62c49a7de0825719de8b, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 2601b427e602de442b8c5348f7f20f5b, type: 3}
+  - DisplayName: Cushion37
+    Category: 4
+    Prefab: {fileID: 7069226559804441305, guid: ade917120eb62fd4a9beb426c26c92f9, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 7e4003d36188e5449951bbf747c82af5, type: 3}
+  - DisplayName: Cushion38
+    Category: 4
+    Prefab: {fileID: 561374112951092708, guid: 88f711221efde1846bd41687e62080a6, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 068c82d9b0c240c409e5ad4b52e2c75a, type: 3}
+  - DisplayName: Cushion39
+    Category: 4
+    Prefab: {fileID: 5821855237761115352, guid: ed5f119bc299d72459533b2b4439a036, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 97fbfb2e32bddf745a62e785c84b9e1a, type: 3}
+  - DisplayName: Cushion40
+    Category: 4
+    Prefab: {fileID: 8624433204296219893, guid: 4dfbfcc55d3394141991af0f9c24a59f, type: 3}
+    Thumbnail: {fileID: 21300000, guid: bc7ec0340d3d81d4a9eb7d32dd05445b, type: 3}
+  - DisplayName: Cushion41
+    Category: 4
+    Prefab: {fileID: 994153772951525461, guid: b77625ae00f9b24439bff14072302948, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 8ec11146bb5661841b7f20d8d00817e5, type: 3}
+  - DisplayName: Cushion42
+    Category: 4
+    Prefab: {fileID: 7592819089370639232, guid: 20274af3696c41641a6e6d0ae31d369c, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 60478a9962e66cd408ab4dcfb23a098d, type: 3}
+  - DisplayName: Cushion43
+    Category: 4
+    Prefab: {fileID: 2007988695978073942, guid: 58279326d2aaeac4cbb9481156169835, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 2065c0b1fe5a577489040b50c268a4d9, type: 3}
+  - DisplayName: Cushion44
+    Category: 4
+    Prefab: {fileID: 2855877831000387802, guid: 37228128e62a92740bbeba49d9286003, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 69484fbb376a33f479c2175069ba2e6b, type: 3}
+  - DisplayName: Cushion45
+    Category: 4
+    Prefab: {fileID: 4585863983694080710, guid: 868a575d7763211499d4c9a2b08ea5e8, type: 3}
+    Thumbnail: {fileID: 21300000, guid: a3d42e39fc2579d4ba10608f7fe843ee, type: 3}
+  - DisplayName: Cushion46
+    Category: 4
+    Prefab: {fileID: 3401252830564312409, guid: 0fa2177af9719e747b9ae0063786cd2f, type: 3}
+    Thumbnail: {fileID: 21300000, guid: dba4c2f8593462c4a9da9ee2ca27cd3d, type: 3}
+  - DisplayName: Cushion47
+    Category: 4
+    Prefab: {fileID: 4592075540108868957, guid: 70bcfb220d03a6044a7df92e9c522398, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 86da2a05780a68442b0bfa68857395a3, type: 3}
+  - DisplayName: Cushion48
+    Category: 4
+    Prefab: {fileID: 2020584031529555000, guid: 989fc89c716f8634198b557ba32f362c, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 104b31e0198391a44ad45f639c4c9153, type: 3}
+  - DisplayName: Cushion49
+    Category: 4
+    Prefab: {fileID: 3463165189189480236, guid: ffb5ff1d0d8e75b48a63beb762865d2e, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 7c978032da7dbc6438c41387feaf7afd, type: 3}
+  - DisplayName: Cushion50
+    Category: 4
+    Prefab: {fileID: 5454447710106390448, guid: 3d2de7edf5381bd4287692bb033ed1a0, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 6cefe6e9da976e04da94f6a846ef3801, type: 3}
   - DisplayName: Drawer01
     Category: 5
     Prefab: {fileID: 3938706445630382354, guid: a089aac6460fcd7479f5d03bca1668dd, type: 3}
@@ -11827,6 +12444,114 @@ MonoBehaviour:
     Category: 8
     Prefab: {fileID: 6591791863778875051, guid: 70099645a02795a4a91d2f05edc3e188, type: 3}
     Thumbnail: {fileID: 21300000, guid: 33e75d6973ed1e247a62704328ac5c88, type: 3}
+  - DisplayName: BoxSashWindowFurnitureNoBarsOAK
+    Category: 9
+    Prefab: {fileID: 1697395758369580, guid: b361626aa8564064e8aa59ad7c062c14, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 1e5b8a04c0c438a47be2eda90c8d413d, type: 3}
+  - DisplayName: BoxSashWindowFurnitureNoBarsRedMahogany
+    Category: 9
+    Prefab: {fileID: 1402545329552356, guid: d45e3ee1287f007498d9b23f5fbcf650, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 576b5e8732894594e97b184877ba5390, type: 3}
+  - DisplayName: BoxSashWindowFurnitureNoBarsWhite
+    Category: 9
+    Prefab: {fileID: 1196911599096162, guid: d8dda4f5976ace140ba36e593f1dbcd8, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 4a6109316fbeadc429e59017c11ce590, type: 3}
+  - DisplayName: BoxSashWindowFurnitureWithBarsOak
+    Category: 9
+    Prefab: {fileID: 1232957454135568, guid: e2d99c20bda678547954b53e1abfdacd, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 8e99e8a77326515458eabe8446bfb156, type: 3}
+  - DisplayName: BoxSashWindowFurnitureWithBarsRedMahogany
+    Category: 9
+    Prefab: {fileID: 1337126009719320, guid: ec58128140d02a44a92a16334bd5759e, type: 3}
+    Thumbnail: {fileID: 21300000, guid: eb39a92a89e701241b571097a704255a, type: 3}
+  - DisplayName: BoxSashWindowFurnitureWithBarsWhite
+    Category: 9
+    Prefab: {fileID: 1925892384497490, guid: d6fad5ec8e7ef3b4f810794f73d132c8, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 753da7a39434833419bfb9702b986394, type: 3}
+  - DisplayName: RoundWindowWhite02
+    Category: 9
+    Prefab: {fileID: 1347003176323148, guid: 31d6b325c82557942a23c796ba82d7c0, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 24879c03959e07a49b4faf76a5708654, type: 3}
+  - DisplayName: RoundWindowWhite03
+    Category: 9
+    Prefab: {fileID: 1711978757246952, guid: a93287d0bbfe66843a9096d69272f3c0, type: 3}
+    Thumbnail: {fileID: 21300000, guid: e6eaca253c04e4749a6cbedfe7bc8838, type: 3}
+  - DisplayName: RoundWindowWhite04
+    Category: 9
+    Prefab: {fileID: 1132288946751310, guid: 12f42584c830f1940a99f5acdf4da458, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 9c9a2e40160af1e458ddd0771a4f9013, type: 3}
+  - DisplayName: RoundWindowWhiteWithBars01
+    Category: 9
+    Prefab: {fileID: 1843385500311706, guid: fff2ff2c8f86382499d2059af9721b5e, type: 3}
+    Thumbnail: {fileID: 21300000, guid: c1f45080205077e4db6181e1a8ba5593, type: 3}
+  - DisplayName: RoundWindowWood02
+    Category: 9
+    Prefab: {fileID: 1676976022341026, guid: 2a5ae54697bf357478c22cbd9069d360, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 553ee9ae0be8ac04489bb8580d05c231, type: 3}
+  - DisplayName: RoundWindowWood03
+    Category: 9
+    Prefab: {fileID: 1148637291659598, guid: 18b519c25c5939147a1c925cd8954c15, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 84aa61276b7abd4498b88e2ad281171e, type: 3}
+  - DisplayName: RoundWindowWood04
+    Category: 9
+    Prefab: {fileID: 1094100989916150, guid: 8146d5f19dead244ca5ff6a75b68eaf8, type: 3}
+    Thumbnail: {fileID: 21300000, guid: a600b391378921746b522b12f0db68aa, type: 3}
+  - DisplayName: RoundWindowWoodWithBars01
+    Category: 9
+    Prefab: {fileID: 1943685391044680, guid: 53be36b39bea99648855f62cc87febd2, type: 3}
+    Thumbnail: {fileID: 21300000, guid: f7d30eb434f1d194baa08a877cf6d05c, type: 3}
+  - DisplayName: 6PanelDoor01
+    Category: 10
+    Prefab: {fileID: 1066802645856666, guid: a10ef057ba509ad4cbd74fa90580170f, type: 3}
+    Thumbnail: {fileID: 21300000, guid: bc55fd98ff5b1ef4f93da899d4f76a7e, type: 3}
+  - DisplayName: 6PanelDoor02
+    Category: 10
+    Prefab: {fileID: 1486139598150096, guid: 3918281148a03a042910127e7712e0f8, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 1a0325a3ca46d694f888ad47b326766d, type: 3}
+  - DisplayName: 6PanelDoor02Mahogany
+    Category: 10
+    Prefab: {fileID: 1881383208402684, guid: 5ed850274c7cecb48805484beaec2344, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 8a7f7524ed30c0b46b98c6b09fd5b86c, type: 3}
+  - DisplayName: 6PanelDoor02White
+    Category: 10
+    Prefab: {fileID: 1212390458530970, guid: 3b5eb9558d4253d44b8886b19f577846, type: 3}
+    Thumbnail: {fileID: 21300000, guid: b06f4d5b2f75d0146b477624c6c56f61, type: 3}
+  - DisplayName: 6PanelDoor03
+    Category: 10
+    Prefab: {fileID: 1149362147825724, guid: 432a92898fd01094187edbee43a789a2, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 31d4dc8fc9db98d4b8695b43d677ee2d, type: 3}
+  - DisplayName: 6PanelDoor03Mahogany
+    Category: 10
+    Prefab: {fileID: 1001882266377484, guid: 28f6df2590c327746855da990d6a1b41, type: 3}
+    Thumbnail: {fileID: 21300000, guid: a79497c896030de4395c01102b1ccc00, type: 3}
+  - DisplayName: 6PanelDoor03White
+    Category: 10
+    Prefab: {fileID: 1877052546638224, guid: 3703177516d741c428844d8cf036df14, type: 3}
+    Thumbnail: {fileID: 21300000, guid: c8450a1a4cb313b46acdf980094b9d25, type: 3}
+  - DisplayName: 6PanelDoor04
+    Category: 10
+    Prefab: {fileID: 1169757648224154, guid: ee5afd2b8deddf84bb139effbe2a0d56, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 6baf89697ea05f943aa105e19d56839f, type: 3}
+  - DisplayName: 6PanelDoor04Mahogany
+    Category: 10
+    Prefab: {fileID: 1163186207175536, guid: df2577d51fe42544fa9410e621ba74e3, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 834416e384a01ae4e9897cf2d41ebb70, type: 3}
+  - DisplayName: 6PanelDoor04White
+    Category: 10
+    Prefab: {fileID: 1394204002244318, guid: be59f396ac09eb44a8fe6615b53bfb81, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 5b45e120c2e8cce4aa9606c3b0fe8722, type: 3}
+  - DisplayName: 6PanelDoor05
+    Category: 10
+    Prefab: {fileID: 1854697009180444, guid: 5ac8e69626dbc7e4c889d0548f639dc2, type: 3}
+    Thumbnail: {fileID: 21300000, guid: f02b8099bbcaee846a2d39f73aa4a300, type: 3}
+  - DisplayName: 6PanelDoor05Mahogany
+    Category: 10
+    Prefab: {fileID: 1737574991452868, guid: 411ce9897faff384488f78cb69d28980, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 2ebae611c6c32c14ea9870fd41f0c63e, type: 3}
+  - DisplayName: 6PanelDoor05White
+    Category: 10
+    Prefab: {fileID: 1112278873180212, guid: c94ff294f58f57244b5b8ac806de81fe, type: 3}
+    Thumbnail: {fileID: 21300000, guid: 31ea442570afa764094dca669d468f26, type: 3}
 --- !u!1 &1950945123
 GameObject:
   m_ObjectHideFlags: 0
@@ -12237,6 +12962,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976334348}
+  m_CullTransparentMesh: 1
+--- !u!1 &1976615136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1976615137}
+  - component: {fileID: 1976615140}
+  - component: {fileID: 1976615139}
+  - component: {fileID: 1976615138}
+  m_Layer: 5
+  m_Name: DoorsButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1976615137
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976615136}
+  m_LocalRotation: {x: -0, y: -0, z: -7.275958e-12, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 770213256}
+  m_Father: {fileID: 1094469630}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1976615138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976615136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1976615139}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1916147176}
+        m_TargetAssemblyTypeName: InteriorPlanner.Systems.Furniture.FurnitureLibraryUI,
+          Assembly-CSharp
+        m_MethodName: FilterByCategoryInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1976615139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976615136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1976615140
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976615136}
   m_CullTransparentMesh: 1
 --- !u!1 &1979411616
 GameObject:

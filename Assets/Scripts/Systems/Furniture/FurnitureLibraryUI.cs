@@ -14,8 +14,18 @@ namespace InteriorPlanner.Systems.Furniture
         [SerializeField] private GameObject furnitureButtonPrefab;
 
         [Header("Auto Load Paths")]
-        [SerializeField] private string prefabsRootFolder = "Assets/Prefabs/Furniture";
-        [SerializeField] private string iconsRootFolder = "Assets/Art/Icons/Furniture";
+        // LISTAS (ARRAYS) PARA LER VÁRIAS PASTAS
+        [SerializeField] private string[] prefabsRootFolders = { 
+            "Assets/Prefabs/Furniture", 
+            "Assets/Prefabs/Structural" 
+        };
+        [SerializeField] private string[] iconsRootFolders = { 
+            "Assets/Art/Icons/Furniture", 
+            "Assets/Art/Icons/Structural",
+            "Assets/Art/Icons/Structural/Janelas",
+            "Assets/Art/Icons/Structural/Portas"
+
+        };
 
         [Header("Generated Data")]
         [SerializeField] private List<FurnitureItemData> furnitureItems = new();
@@ -27,17 +37,11 @@ namespace InteriorPlanner.Systems.Furniture
 
         // --- MÉTODOS DE FILTRO ---
 
-        /// <summary>
-        /// Mostra todos os itens da biblioteca.
-        /// </summary>
         public void ShowAll()
         {
             GenerateFurnitureButtons(furnitureItems);
         }
 
-        /// <summary>
-        /// Filtra usando o Enum diretamente (Útil para botões configurados via Inspector).
-        /// </summary>
         public void FilterByCategory(FurnitureCategory category)
         {
             List<FurnitureItemData> filtered = new List<FurnitureItemData>();
@@ -53,9 +57,6 @@ namespace InteriorPlanner.Systems.Furniture
             GenerateFurnitureButtons(filtered);
         }
 
-        /// <summary>
-        /// Filtra usando o índice inteiro (Útil se você estiver usando Dropdowns ou IDs numéricos).
-        /// </summary>
         public void FilterByCategoryInt(int categoryIndex)
         {
             FurnitureCategory category = (FurnitureCategory)categoryIndex;
@@ -90,7 +91,6 @@ namespace InteriorPlanner.Systems.Furniture
         {
             if (furnitureContent == null) return;
 
-            // Limpa os botões antigos antes de gerar novos
             for (int i = furnitureContent.childCount - 1; i >= 0; i--)
             {
                 Destroy(furnitureContent.GetChild(i).gameObject);
@@ -105,50 +105,64 @@ namespace InteriorPlanner.Systems.Furniture
         {
             furnitureItems.Clear();
 
-            if (!AssetDatabase.IsValidFolder(prefabsRootFolder))
+            // O código agora faz um loop por todas as pastas que definimos lá em cima
+            foreach (string rootFolder in prefabsRootFolders)
             {
-                Debug.LogError($"Pasta de prefabs inválida: {prefabsRootFolder}");
-                return;
-            }
-
-            string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { prefabsRootFolder });
-
-            for (int i = 0; i < prefabGuids.Length; i++)
-            {
-                string prefabPath = AssetDatabase.GUIDToAssetPath(prefabGuids[i]);
-                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-
-                if (prefab == null) continue;
-
-                // Detecta a categoria baseada no nome da pasta onde o prefab está
-                string categoryFolderName = GetImmediateCategoryFolder(prefabPath, prefabsRootFolder);
-
-                if (!TryParseCategory(categoryFolderName, out FurnitureCategory category))
+                if (!AssetDatabase.IsValidFolder(rootFolder))
                 {
-                    Debug.LogWarning($"Pasta '{categoryFolderName}' não corresponde a nenhuma categoria no Enum. Ignorado: {prefabPath}");
-                    continue;
+                    Debug.LogWarning($"Pasta de prefabs inválida ou não encontrada: {rootFolder}");
+                    continue; // Salta para a próxima pasta em vez de parar tudo
                 }
 
-                // Busca o ícone correspondente na pasta de ícones
-                string iconPath = BuildIconPath(prefab.name, categoryFolderName);
-                Sprite thumbnail = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
+                string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { rootFolder });
 
-                FurnitureItemData item = new FurnitureItemData
+                for (int i = 0; i < prefabGuids.Length; i++)
                 {
-                    DisplayName = prefab.name,
-                    Category = category,
-                    Prefab = prefab,
-                    Thumbnail = thumbnail
-                };
+                    string prefabPath = AssetDatabase.GUIDToAssetPath(prefabGuids[i]);
+                    GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
 
-                furnitureItems.Add(item);
+                    if (prefab == null) continue;
+
+                    string categoryFolderName = GetImmediateCategoryFolder(prefabPath, rootFolder);
+
+                    if (!TryParseCategory(categoryFolderName, out FurnitureCategory category))
+                    {
+                        Debug.LogWarning($"Pasta '{categoryFolderName}' não corresponde a nenhuma categoria no Enum. Ignorado: {prefabPath}");
+                        continue;
+                    }
+
+                    // --- O NOVO SISTEMA DE ÍCONES (À Prova de Balas) ---
+                    Sprite thumbnail = null;
+                    
+                    // Procura APENAS nas pastas que tu definiste no Inspector
+                    string[] iconGuids = AssetDatabase.FindAssets($"{prefab.name} t:Sprite", iconsRootFolders);
+                    
+                    if (iconGuids.Length > 0)
+                    {
+                        string foundIconPath = AssetDatabase.GUIDToAssetPath(iconGuids[0]);
+                        thumbnail = AssetDatabase.LoadAssetAtPath<Sprite>(foundIconPath);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"<color=orange>Aviso:</color> Ícone não encontrado para '{prefab.name}'. Confirma se a imagem existe nas pastas indicadas e se está como Sprite (2D and UI).");
+                    }
+
+                    FurnitureItemData item = new FurnitureItemData
+                    {
+                        DisplayName = prefab.name,
+                        Category = category,
+                        Prefab = prefab,
+                        Thumbnail = thumbnail
+                    };
+
+                    furnitureItems.Add(item);
+                }
             }
 
-            // Marca o objeto como "sujo" para que a Unity salve as alterações na lista
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
 
-            Debug.Log($"Sucesso! {furnitureItems.Count} itens carregados automaticamente.");
+            Debug.Log($"<color=cyan>Sucesso!</color> {furnitureItems.Count} itens carregados automaticamente de todas as pastas.");
         }
 
         private string GetImmediateCategoryFolder(string assetPath, string rootFolder)
@@ -161,21 +175,12 @@ namespace InteriorPlanner.Systems.Furniture
             string relative = normalizedAssetPath.Substring(normalizedRoot.Length).TrimStart('/');
             string[] parts = relative.Split('/');
 
-            // Retorna o nome da primeira pasta dentro da raiz (ex: "Chairs")
             return parts.Length > 1 ? parts[0] : string.Empty;
         }
 
         private bool TryParseCategory(string folderName, out FurnitureCategory category)
         {
             return System.Enum.TryParse(folderName, true, out category);
-        }
-
-        private string BuildIconPath(string prefabName, string categoryFolder)
-        {
-            string path = iconsRootFolder;
-            if (!string.IsNullOrEmpty(categoryFolder)) path += $"/{categoryFolder}";
-            
-            return $"{path}/{prefabName}.png";
         }
 #endif
     }

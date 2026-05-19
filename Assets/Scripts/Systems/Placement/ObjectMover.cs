@@ -10,7 +10,8 @@ namespace InteriorPlanner.Systems.Placement
     {
         [SerializeField] private UnityEngine.Camera mainCamera;
         [SerializeField] private LayerMask floorLayerMask; 
-        [SerializeField] private LayerMask obstacleLayerMask; // NOVA: A layer dos outros móveis!
+        [SerializeField] private LayerMask obstacleLayerMask; 
+        [SerializeField] private LayerMask wallLayerMask; // A máscara nova está aqui!
         [SerializeField] private SelectionManager selectionManager;
         
         [Header("Rotation Settings")]
@@ -22,10 +23,6 @@ namespace InteriorPlanner.Systems.Placement
         [SerializeField] private float gridSize = 0.5f; 
         [SerializeField] private bool useSmoothMovement = true; 
         [SerializeField] private float smoothSpeed = 15f;
-
-        [SerializeField] private LayerMask floorLayerMask; 
-        [SerializeField] private LayerMask obstacleLayerMask; 
-        [SerializeField] private LayerMask wallLayerMask; // ADICIONA ESTA LINHA!
 
         private PlaceableObject currentObject;
         private bool isDragging;
@@ -65,43 +62,35 @@ namespace InteriorPlanner.Systems.Placement
 
                 MoveObjectWithMouse();
                 RotateObjectWithInput();
-                CheckCollisions(); // NOVA: Verifica se está a bater noutro móvel
+                CheckCollisions(); 
             }
 
             if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
-                // NOVO: Só deixa largar se a posição for Válida!
                 if (currentObject != null && currentObject.IsValidPosition)
                 {
                     isDragging = false;
                     currentObject = null;
                 }
-                // Se for inválida (vermelho), o móvel continua colado ao rato.
             }
-        }   
+        }
 
-      private void MoveObjectWithMouse()
+        private void MoveObjectWithMouse()
         {
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             // --- RAMIFICAÇÃO 1: OBJETOS DE PAREDE (Portas / Janelas) ---
             if (currentObject.RequiresWallSupport)
             {
-                // Dispara o raio APENAS contra a layer da Parede
                 if (Physics.Raycast(ray, out RaycastHit hit, 500f, wallLayerMask))
                 {
-                    // Cola o objeto exatamente no ponto onde o raio bateu na parede
                     currentObject.transform.position = hit.point;
-
-                    // O 'hit.normal' é um vetor que aponta para fora da parede. 
-                    // Isto roda a janela automaticamente para ela não ficar "espetada" de lado!
                     currentObject.transform.rotation = Quaternion.LookRotation(hit.normal);
                 }
             }
             // --- RAMIFICAÇÃO 2: OBJETOS DE CHÃO (Móveis / Divisórias) ---
             else
             {
-                // Dispara o raio APENAS contra a layer do Chão
                 if (Physics.Raycast(ray, out RaycastHit hit, 500f, floorLayerMask))
                 {
                     Vector3 targetPosition = hit.point + dragOffset;
@@ -127,8 +116,7 @@ namespace InteriorPlanner.Systems.Placement
             }
         }
 
-        // --- NOVA FUNÇÃO: O RADAR DE COLISÕES ---
-private void CheckCollisions()
+        private void CheckCollisions()
         {
             BoxCollider boxCol = currentObject.GetComponentInChildren<BoxCollider>();
             if (boxCol == null) return;
@@ -137,7 +125,6 @@ private void CheckCollisions()
             Vector3 halfExtents = Vector3.Scale(boxCol.size, boxCol.transform.lossyScale) * 0.5f;
             halfExtents *= 0.95f; 
 
-            // O Radar volta a usar o filtro (obstacleLayerMask) para otimizar a performance
             Collider[] hits = Physics.OverlapBox(worldCenter, halfExtents, boxCol.transform.rotation, obstacleLayerMask);
 
             bool isColliding = false;
@@ -152,6 +139,7 @@ private void CheckCollisions()
 
             currentObject.SetValidState(!isColliding);
         }
+
         private Vector3 ClampPositionToRoom(Vector3 targetPos)
         {
             if (AppManager.Instance == null || !AppManager.Instance.ProjectSession.HasProjectLoaded())

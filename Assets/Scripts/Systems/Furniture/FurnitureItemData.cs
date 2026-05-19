@@ -12,10 +12,12 @@ namespace InteriorPlanner.Systems.Furniture
         Drawers,
         Kitchen,
         Sofas,
-        Tables
+        Tables,
+        Janelas, 
+        Portas
     }
 
-    [System.Serializable]
+   [System.Serializable]
     public class FurnitureItemData
     {
         public string DisplayName;
