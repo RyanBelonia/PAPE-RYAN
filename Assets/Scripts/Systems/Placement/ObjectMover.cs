@@ -11,7 +11,7 @@ namespace InteriorPlanner.Systems.Placement
         [SerializeField] private UnityEngine.Camera mainCamera;
         [SerializeField] private LayerMask floorLayerMask; 
         [SerializeField] private LayerMask obstacleLayerMask; 
-        [SerializeField] private LayerMask wallLayerMask; // A máscara nova está aqui!
+        [SerializeField] private LayerMask wallLayerMask;
         [SerializeField] private SelectionManager selectionManager;
         
         [Header("Rotation Settings")]
@@ -43,11 +43,24 @@ namespace InteriorPlanner.Systems.Placement
                 {
                     Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
                     
-                    if (Physics.Raycast(ray, out RaycastHit hit, 500f, floorLayerMask))
+                    // --- ALTERAÇÃO: Offset adaptado para Parede vs Chão ---
+                    if (currentObject.RequiresWallSupport)
                     {
-                        dragOffset = currentObject.transform.position - hit.point;
-                        dragOffset.y = 0; 
-                        isDragging = true;
+                        if (Physics.Raycast(ray, out RaycastHit hit, 500f, wallLayerMask))
+                        {
+                            // Para objetos de parede, o offset é calculado em relação à normal da parede
+                            dragOffset = currentObject.transform.position - hit.point;
+                            isDragging = true;
+                        }
+                    }
+                    else
+                    {
+                        if (Physics.Raycast(ray, out RaycastHit hit, 500f, floorLayerMask))
+                        {
+                            dragOffset = currentObject.transform.position - hit.point;
+                            dragOffset.y = 0; 
+                            isDragging = true;
+                        }
                     }
                 }
             }
@@ -79,14 +92,24 @@ namespace InteriorPlanner.Systems.Placement
         {
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            // --- RAMIFICAÇÃO 1: OBJETOS DE PAREDE (Portas / Janelas) ---
+            // --- RAMIFICAÇÃO 1: OBJETOS DE PAREDE (Arrastar pela parede) ---
             if (currentObject.RequiresWallSupport)
             {
+                // Dispara o raio contra TODAS as paredes para permitir transitar de uma parede para outra
                 if (Physics.Raycast(ray, out RaycastHit hit, 500f, wallLayerMask))
                 {
-                    currentObject.transform.position = hit.point;
+                    // Mantém a altura inicial do objeto (para portas não afundarem no chão, por exemplo)
+                    // Mas permite mover horizontalmente ao longo da parede
+                    Vector3 targetPos = hit.point;
+                    
+                    // Se quiseres que a janela "siga" o rato em altura livremente, retira a linha abaixo.
+                    // Se preferires que ela mantenha a altura a que foi criada (ou de uma porta), mantém.
+                    // targetPos.y = currentObject.transform.position.y; 
+
+                    currentObject.transform.position = targetPos;
                     currentObject.transform.rotation = Quaternion.LookRotation(hit.normal);
                 }
+                // Se o rato sair da parede, não faz nada (o objeto fica colado no último ponto válido)
             }
             // --- RAMIFICAÇÃO 2: OBJETOS DE CHÃO (Móveis / Divisórias) ---
             else
@@ -116,6 +139,7 @@ namespace InteriorPlanner.Systems.Placement
             }
         }
 
+        // ... (O resto do teu código ObjectMover continua igual a partir daqui) ...
         private void CheckCollisions()
         {
             BoxCollider boxCol = currentObject.GetComponentInChildren<BoxCollider>();

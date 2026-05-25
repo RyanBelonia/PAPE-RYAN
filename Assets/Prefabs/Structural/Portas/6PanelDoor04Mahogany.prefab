@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4022487619862584}
   - component: {fileID: 1285795292558445568}
   - component: {fileID: 3044016404951558845}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 6PanelDoor04Mahogany
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 33412682759500356}
   - component: {fileID: 23089800640651382}
   - component: {fileID: 64005210749418880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

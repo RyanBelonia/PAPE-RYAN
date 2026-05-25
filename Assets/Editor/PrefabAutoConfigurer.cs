@@ -12,13 +12,15 @@ public class PrefabAutoConfigurer : EditorWindow
         string furnitureFolder = "Assets/Prefabs/Furniture";
         string janelasFolder = "Assets/Prefabs/Structural/Janelas";
         string portasFolder = "Assets/Prefabs/Structural/Portas";
+        string divisoriasFolder = "Assets/Prefabs/Structural/Divisorias";
 
         int count = 0;
 
-        // Processar cada pasta com as suas regras específicas de colocação
-        count += ProcessFolder(furnitureFolder, isWindow: false, isDoor: false);
-        count += ProcessFolder(janelasFolder, isWindow: true, isDoor: false);
-        count += ProcessFolder(portasFolder, isWindow: false, isDoor: true);
+        // Processar cada pasta APENAS com o caminho. O script descobre o resto sozinho!
+        count += ProcessFolder(furnitureFolder);
+        count += ProcessFolder(janelasFolder);
+        count += ProcessFolder(portasFolder);
+        count += ProcessFolder(divisoriasFolder);
 
         // Finalizar e atualizar a base de dados da Unity
         AssetDatabase.SaveAssets();
@@ -27,7 +29,8 @@ public class PrefabAutoConfigurer : EditorWindow
         Debug.Log($"<color=green>Sucesso!</color> {count} prefabs foram configurados automaticamente com base nas subpastas.");
     }
 
-    private static int ProcessFolder(string folderPath, bool isWindow, bool isDoor)
+    // A função agora só pede a pasta. Acabaram-se os booleanos confusos!
+    private static int ProcessFolder(string folderPath)
     {
         string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { folderPath });
         if (guids.Length == 0) return 0;
@@ -44,7 +47,7 @@ public class PrefabAutoConfigurer : EditorWindow
             if (placeable == null)
                 placeable = instance.AddComponent<PlaceableObject>();
 
-            // Coletar todos os Renderers (Resolve o problema de arrastar manualmente)
+            // Coletar todos os Renderers
             MeshRenderer[] meshRenderers = instance.GetComponentsInChildren<MeshRenderer>(true);
             SkinnedMeshRenderer[] skinnedRenderers = instance.GetComponentsInChildren<SkinnedMeshRenderer>(true);
 
@@ -52,26 +55,22 @@ public class PrefabAutoConfigurer : EditorWindow
             allRenderers.AddRange(meshRenderers);
             allRenderers.AddRange(skinnedRenderers);
 
-            // Configuração padrão (Móveis normais da pasta Furniture)
-            // CORRIGIDO: Tudo usa Furniture agora, para não dar erro no teu Enum!
+            // --- LÓGICA INTELIGENTE BASEADA NO NOME DA PASTA ---
+            bool isWindow = folderPath.Contains("Janelas");
+            bool isDoor = folderPath.Contains("Portas");
+            bool isDivisoria = folderPath.Contains("Divisorias");
+
             PlaceableObjectType type = PlaceableObjectType.Furniture; 
             bool canMove = true;
-            bool canRotate = true;
-            bool canScale = false;
-            bool requiresWallSupport = false;
-
-            // Se estiver na pasta das Janelas
-            if (isWindow)
-            {
-                canRotate = false;          // A parede define a rotação
-                requiresWallSupport = true; // Gruda na parede
-            }
-            // Se estiver na pasta das Portas
-            else if (isDoor)
-            {
-                canRotate = false;          // A parede define a rotação
-                requiresWallSupport = true; // Gruda na parede
-            }
+            
+            // Janelas e Portas não rodam sozinhas, Móveis e Divisórias rodam
+            bool canRotate = !isWindow && !isDoor; 
+            
+            // SÓ as Divisórias é que podem ser esticadas com o rato
+            bool canScale = isDivisoria; 
+            
+            // Janelas e Portas precisam de parede para colar
+            bool requiresWallSupport = isWindow || isDoor;
 
             // Aplicar as definições automáticas ao script
             placeable.Configure(type, canMove, canRotate, canScale, requiresWallSupport, allRenderers.ToArray());

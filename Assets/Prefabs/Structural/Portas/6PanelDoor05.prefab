@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33408456038641414}
   - component: {fileID: 23776303727912944}
   - component: {fileID: 64559464910793522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4476849894301756}
   - component: {fileID: 5337336346320694047}
   - component: {fileID: 1619001143144460277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 6PanelDoor05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

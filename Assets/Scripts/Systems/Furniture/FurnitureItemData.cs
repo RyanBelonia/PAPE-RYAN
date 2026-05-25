@@ -14,7 +14,9 @@ namespace InteriorPlanner.Systems.Furniture
         Sofas,
         Tables,
         Janelas, 
-        Portas
+        Portas,
+        Divisorias 
+        
     }
 
    [System.Serializable]

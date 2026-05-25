@@ -503,7 +503,7 @@ MonoBehaviour:
   objectType: 0
   canMove: 1
   canRotate: 1
-  canScale: 1
+  canScale: 0
   requiresWallSupport: 0
   renderersToHighlight:
   - {fileID: 7603712712292417124}

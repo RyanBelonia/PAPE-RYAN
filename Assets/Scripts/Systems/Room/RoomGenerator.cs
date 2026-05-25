@@ -98,6 +98,18 @@ namespace InteriorPlanner.Systems.Room
             wall.transform.position = position;
             wall.transform.localScale = scale;
 
+            // --- NOVO: Define a layer da parede para "Wall" ---
+            int wallLayer = LayerMask.NameToLayer("Wall");      
+            if (wallLayer == -1)
+            {
+                Debug.LogWarning("A Layer 'Wall' não existe! Vai a Edit > Project Settings > Tags and Layers e cria-a.");
+            }
+            else
+            {
+                wall.layer = wallLayer;
+            }
+            // ---------------------------------------------------
+
             if (wallMaterial != null)
                 wall.GetComponent<Renderer>().material = wallMaterial;
         }
