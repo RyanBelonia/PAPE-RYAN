@@ -2,34 +2,30 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using InteriorPlanner.Systems.Placement;
+using InteriorPlanner.Systems.Tools; // ADICIONADO: Para aceder ao componente Paintable
 
 public class PrefabAutoConfigurer : EditorWindow
 {
     [MenuItem("Tools/Furniture/Auto Configure All Prefabs")]
     public static void ConfigurePrefabs()
     {
-        // 1. Caminhos exatos das tuas pastas do projeto
         string furnitureFolder = "Assets/Prefabs/Furniture";
         string janelasFolder = "Assets/Prefabs/Structural/Janelas";
         string portasFolder = "Assets/Prefabs/Structural/Portas";
         string divisoriasFolder = "Assets/Prefabs/Structural/Divisorias";
 
         int count = 0;
-
-        // Processar cada pasta APENAS com o caminho. O script descobre o resto sozinho!
         count += ProcessFolder(furnitureFolder);
         count += ProcessFolder(janelasFolder);
         count += ProcessFolder(portasFolder);
         count += ProcessFolder(divisoriasFolder);
 
-        // Finalizar e atualizar a base de dados da Unity
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
         Debug.Log($"<color=green>Sucesso!</color> {count} prefabs foram configurados automaticamente com base nas subpastas.");
     }
 
-    // A função agora só pede a pasta. Acabaram-se os booleanos confusos!
     private static int ProcessFolder(string folderPath)
     {
         string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { folderPath });
@@ -42,12 +38,10 @@ public class PrefabAutoConfigurer : EditorWindow
             string path = AssetDatabase.GUIDToAssetPath(guid);
             GameObject instance = PrefabUtility.LoadPrefabContents(path);
 
-            // Garantir o componente PlaceableObject
             PlaceableObject placeable = instance.GetComponent<PlaceableObject>();
             if (placeable == null)
                 placeable = instance.AddComponent<PlaceableObject>();
 
-            // Coletar todos os Renderers
             MeshRenderer[] meshRenderers = instance.GetComponentsInChildren<MeshRenderer>(true);
             SkinnedMeshRenderer[] skinnedRenderers = instance.GetComponentsInChildren<SkinnedMeshRenderer>(true);
 
@@ -55,27 +49,44 @@ public class PrefabAutoConfigurer : EditorWindow
             allRenderers.AddRange(meshRenderers);
             allRenderers.AddRange(skinnedRenderers);
 
-            // --- LÓGICA INTELIGENTE BASEADA NO NOME DA PASTA ---
             bool isWindow = folderPath.Contains("Janelas");
             bool isDoor = folderPath.Contains("Portas");
             bool isDivisoria = folderPath.Contains("Divisorias");
 
             PlaceableObjectType type = PlaceableObjectType.Furniture; 
             bool canMove = true;
-            
-            // Janelas e Portas não rodam sozinhas, Móveis e Divisórias rodam
             bool canRotate = !isWindow && !isDoor; 
-            
-            // SÓ as Divisórias é que podem ser esticadas com o rato
-            bool canScale = isDivisoria; 
-            
-            // Janelas e Portas precisam de parede para colar
+            bool canScale = isDivisoria; // Modifica isto mais tarde se quiseres outros móveis a esticar!
             bool requiresWallSupport = isWindow || isDoor;
 
-            // Aplicar as definições automáticas ao script
             placeable.Configure(type, canMove, canRotate, canScale, requiresWallSupport, allRenderers.ToArray());
 
-            // Lógica do BoxCollider automática baseada no tamanho do modelo 3D
+            // --- LÓGICA AUTOMÁTICA DA ETIQUETA DE PINTURA ---
+            Paintable paintComponent = instance.GetComponent<Paintable>();
+            if (isDivisoria)
+            {
+                // Se for da pasta Divisorias e não tiver o componente, adiciona-o
+                if (paintComponent == null)
+                    instance.AddComponent<Paintable>();
+            }
+            else
+            {
+                // Se estiver noutra pasta qualquer, remove para garantir que não se pinta por engano
+                if (paintComponent != null)
+                    DestroyImmediate(paintComponent, true);
+            }
+            // -------------------------------------------------
+
+            int placeableLayer = LayerMask.NameToLayer("Placeable");
+            if (placeableLayer != -1)
+            {
+                instance.layer = placeableLayer;
+                foreach (Transform child in instance.GetComponentsInChildren<Transform>(true))
+                {
+                    child.gameObject.layer = placeableLayer;
+                }
+            }
+
             BoxCollider boxCollider = instance.GetComponent<BoxCollider>();
             if (boxCollider == null)
                 boxCollider = instance.AddComponent<BoxCollider>();
@@ -108,7 +119,6 @@ public class PrefabAutoConfigurer : EditorWindow
                 }
             }
 
-            // Salvar e fechar o Prefab em memória
             PrefabUtility.SaveAsPrefabAsset(instance, path);
             PrefabUtility.UnloadPrefabContents(instance);
             count++;

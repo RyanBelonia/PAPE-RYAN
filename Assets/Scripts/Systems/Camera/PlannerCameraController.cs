@@ -1,5 +1,6 @@
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems; // ADICIONADO: Necessário para detetar a UI
 
 namespace InteriorPlanner.Systems.Camera
 {
@@ -117,7 +118,8 @@ namespace InteriorPlanner.Systems.Camera
                 transform.position += move.normalized * moveSpeed * Time.deltaTime;
             }
 
-            if (allowScrollForwardMovement)
+            // --- ALTERAÇÃO AQUI: Só faz Zoom se tiver permissão E não estiver sobre a UI ---
+            if (allowScrollForwardMovement && !IsPointerOverUI())
             {
                 float scroll = Mouse.current.scroll.ReadValue().y;
 
@@ -157,6 +159,12 @@ namespace InteriorPlanner.Systems.Camera
             while (angle > 180f) angle -= 360f;
             while (angle < -180f) angle += 360f;
             return angle;
+        }
+
+        // --- NOVA FUNÇÃO ---
+        private bool IsPointerOverUI()
+        {
+            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
         }
     }
 }
