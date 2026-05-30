@@ -135,5 +135,26 @@ namespace InteriorPlanner.Systems.Placement
                 }
             }
         }
+        // NOVA FUNÇÃO: O Balde de Tinta chama isto para atualizar a memória do objeto!
+        public void UpdateOriginalMaterial(Material newMaterial)
+        {
+            if (renderersToHighlight == null) return;
+
+            foreach (var rend in renderersToHighlight)
+            {
+                if (rend != null)
+                {
+                    // Aplica fisicamente a nova tinta
+                    rend.material = newMaterial;
+                    
+                    // Atualiza a "memória" para que ele não volte ao branco ao ser selecionado
+                    originalMaterials[rend] = rend.materials; 
+                }
+            }
+            
+            // Força o objeto a re-desenhar-se com a nova textura
+            UpdateVisualState(); 
+        }
     }
+    
 }
