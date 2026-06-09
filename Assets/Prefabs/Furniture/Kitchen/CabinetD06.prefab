@@ -237,6 +237,8 @@ MonoBehaviour:
   - {fileID: 2862987142332320101}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
+  displayNamePT: 
+  originalPrefabID: CabinetD06
 --- !u!65 &5147368227755306896
 BoxCollider:
   m_ObjectHideFlags: 0

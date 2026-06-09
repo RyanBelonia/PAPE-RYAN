@@ -76,6 +76,8 @@ MonoBehaviour:
   - {fileID: 23864389184943072}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
+  displayNamePT: 
+  originalPrefabID: RoundWindowWhite04
 --- !u!1 &1542566020094362
 GameObject:
   m_ObjectHideFlags: 0

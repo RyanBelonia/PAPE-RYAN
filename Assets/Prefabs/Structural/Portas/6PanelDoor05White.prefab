@@ -55,6 +55,8 @@ MonoBehaviour:
   - {fileID: 23130039645898634}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 0}
+  displayNamePT: 
+  originalPrefabID: 6PanelDoor05White
 --- !u!65 &8944167072352167083
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using InteriorPlanner.Systems.Placement;
-using InteriorPlanner.Systems.Tools; // ADICIONADO: Para aceder ao componente Paintable
+using InteriorPlanner.Systems.Tools; 
 
 public class PrefabAutoConfigurer : EditorWindow
 {
@@ -23,7 +23,7 @@ public class PrefabAutoConfigurer : EditorWindow
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log($"<color=green>Sucesso!</color> {count} prefabs foram configurados automaticamente com base nas subpastas.");
+        Debug.Log($"<color=green>Sucesso!</color> {count} prefabs foram configurados automaticamente e o ID original foi gravado.");
     }
 
     private static int ProcessFolder(string folderPath)
@@ -42,6 +42,10 @@ public class PrefabAutoConfigurer : EditorWindow
             if (placeable == null)
                 placeable = instance.AddComponent<PlaceableObject>();
 
+            // --- ADICIONADO: GRAVAR O ID ORIGINAL (NOME DO FICHEIRO) PARA O SAVE SYSTEM ---
+            placeable.originalPrefabID = instance.name;
+            // -----------------------------------------------------------------------------
+
             MeshRenderer[] meshRenderers = instance.GetComponentsInChildren<MeshRenderer>(true);
             SkinnedMeshRenderer[] skinnedRenderers = instance.GetComponentsInChildren<SkinnedMeshRenderer>(true);
 
@@ -56,7 +60,7 @@ public class PrefabAutoConfigurer : EditorWindow
             PlaceableObjectType type = PlaceableObjectType.Furniture; 
             bool canMove = true;
             bool canRotate = !isWindow && !isDoor; 
-            bool canScale = isDivisoria; // Modifica isto mais tarde se quiseres outros móveis a esticar!
+            bool canScale = isDivisoria; 
             bool requiresWallSupport = isWindow || isDoor;
 
             placeable.Configure(type, canMove, canRotate, canScale, requiresWallSupport, allRenderers.ToArray());
@@ -65,13 +69,11 @@ public class PrefabAutoConfigurer : EditorWindow
             Paintable paintComponent = instance.GetComponent<Paintable>();
             if (isDivisoria)
             {
-                // Se for da pasta Divisorias e não tiver o componente, adiciona-o
                 if (paintComponent == null)
                     instance.AddComponent<Paintable>();
             }
             else
             {
-                // Se estiver noutra pasta qualquer, remove para garantir que não se pinta por engano
                 if (paintComponent != null)
                     DestroyImmediate(paintComponent, true);
             }

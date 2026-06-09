@@ -145,6 +145,8 @@ MonoBehaviour:
   - {fileID: 7449592764093237029}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
+  displayNamePT: 
+  originalPrefabID: Cushion13
 --- !u!65 &2112801864716851900
 BoxCollider:
   m_ObjectHideFlags: 0

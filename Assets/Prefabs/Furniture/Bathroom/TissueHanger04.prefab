@@ -145,6 +145,8 @@ MonoBehaviour:
   - {fileID: 2570581889372328550}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
+  displayNamePT: 
+  originalPrefabID: TissueHanger04
 --- !u!65 &2940381104996653634
 BoxCollider:
   m_ObjectHideFlags: 0

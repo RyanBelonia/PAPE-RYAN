@@ -147,6 +147,8 @@ MonoBehaviour:
   - {fileID: 6173856126789284728}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 2100000, guid: ed2ff75f4aeb1ee4ab275f7f856c09ae, type: 2}
+  displayNamePT: 
+  originalPrefabID: Bed03
 --- !u!65 &6029755989821960372
 BoxCollider:
   m_ObjectHideFlags: 0

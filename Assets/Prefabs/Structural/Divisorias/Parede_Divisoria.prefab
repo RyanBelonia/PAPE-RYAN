@@ -168,6 +168,8 @@ MonoBehaviour:
   - {fileID: 7771479043293972793}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   invalidMaterial: {fileID: 0}
+  displayNamePT: 
+  originalPrefabID: Parede_Divisoria
 --- !u!65 &4656841347901841901
 BoxCollider:
   m_ObjectHideFlags: 0

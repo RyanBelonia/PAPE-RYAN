@@ -14,7 +14,6 @@ namespace InteriorPlanner.Systems.Furniture
         [SerializeField] private GameObject furnitureButtonPrefab;
 
         [Header("Auto Load Paths")]
-        // LISTAS (ARRAYS) PARA LER VÁRIAS PASTAS
         [SerializeField] private string[] prefabsRootFolders = { 
             "Assets/Prefabs/Furniture", 
             "Assets/Prefabs/Structural" 
@@ -24,7 +23,6 @@ namespace InteriorPlanner.Systems.Furniture
             "Assets/Art/Icons/Structural",
             "Assets/Art/Icons/Structural/Janelas",
             "Assets/Art/Icons/Structural/Portas"
-
         };
 
         [Header("Generated Data")]
@@ -105,13 +103,12 @@ namespace InteriorPlanner.Systems.Furniture
         {
             furnitureItems.Clear();
 
-            // O código agora faz um loop por todas as pastas que definimos lá em cima
             foreach (string rootFolder in prefabsRootFolders)
             {
                 if (!AssetDatabase.IsValidFolder(rootFolder))
                 {
                     Debug.LogWarning($"Pasta de prefabs inválida ou não encontrada: {rootFolder}");
-                    continue; // Salta para a próxima pasta em vez de parar tudo
+                    continue; 
                 }
 
                 string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { rootFolder });
@@ -131,10 +128,7 @@ namespace InteriorPlanner.Systems.Furniture
                         continue;
                     }
 
-                    // --- O NOVO SISTEMA DE ÍCONES (À Prova de Balas) ---
                     Sprite thumbnail = null;
-                    
-                    // Procura APENAS nas pastas que tu definiste no Inspector
                     string[] iconGuids = AssetDatabase.FindAssets($"{prefab.name} t:Sprite", iconsRootFolders);
                     
                     if (iconGuids.Length > 0)
@@ -147,9 +141,10 @@ namespace InteriorPlanner.Systems.Furniture
                         Debug.LogWarning($"<color=orange>Aviso:</color> Ícone não encontrado para '{prefab.name}'. Confirma se a imagem existe nas pastas indicadas e se está como Sprite (2D and UI).");
                     }
 
+                    // --- O SEGREDO ESTÁ AQUI: Chamamos a função de tradução para o DisplayName ---
                     FurnitureItemData item = new FurnitureItemData
                     {
-                        DisplayName = prefab.name,
+                        DisplayName = TranslateToPortuguese(prefab.name, prefabPath),
                         Category = category,
                         Prefab = prefab,
                         Thumbnail = thumbnail
@@ -162,7 +157,7 @@ namespace InteriorPlanner.Systems.Furniture
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
 
-            Debug.Log($"<color=cyan>Sucesso!</color> {furnitureItems.Count} itens carregados automaticamente de todas as pastas.");
+            Debug.Log($"<color=cyan>Sucesso!</color> {furnitureItems.Count} itens carregados e traduzidos para a UI.");
         }
 
         private string GetImmediateCategoryFolder(string assetPath, string rootFolder)
@@ -181,6 +176,47 @@ namespace InteriorPlanner.Systems.Furniture
         private bool TryParseCategory(string folderName, out FurnitureCategory category)
         {
             return System.Enum.TryParse(folderName, true, out category);
+        }
+
+        // --- DICIONÁRIO DE TRADUÇÃO PT-PT ---
+        private string TranslateToPortuguese(string englishName, string path)
+        {
+            string lowerName = englishName.ToLower();
+
+            // Furniture Collection
+            if (lowerName.Contains("bed")) return "Cama";
+            if (lowerName.Contains("chair")) return "Cadeira";
+            if (lowerName.Contains("closet")) return "Roupeiro";
+            if (lowerName.Contains("cushion")) return "Almofada";
+            if (lowerName.Contains("drawer")) return "Cómoda";
+            if (lowerName.Contains("sofa")) return "Sofá";
+            if (lowerName.Contains("table")) return "Mesa";
+
+            // Bathroom Collection
+            if (lowerName.Contains("shower")) return "Chuveiro";
+            if (lowerName.Contains("tissue")) return "Porta-rolos";
+            if (lowerName.Contains("bathtub") || lowerName.Contains("bath")) return "Banheira";
+            if (lowerName.Contains("toilet")) return "Sanita";
+            if (lowerName.Contains("towel")) return "Toalheiro";
+            if (lowerName.Contains("vanity")) return "Móvel de Lavatório";
+            if (lowerName.Contains("wash basin") || lowerName.Contains("basin")) return "Lavatório";
+
+            // Kitchen Collection
+            if (lowerName.Contains("cabinet")) return "Armário";
+            if (lowerName.Contains("exhaust")) return "Exaustor";
+            if (lowerName.Contains("stove")) return "Fogão";
+            if (lowerName.Contains("microwave")) return "Micro-ondas";
+            if (lowerName.Contains("oven")) return "Forno";
+            if (lowerName.Contains("refrigerator") || lowerName.Contains("fridge")) return "Frigorífico";
+            if (lowerName.Contains("sink")) return "Lava-loiça";
+
+            // Structural 
+            if (path.Contains("Janelas")) return "Janela";
+            if (path.Contains("Portas")) return "Porta";
+            if (path.Contains("Divisorias")) return "Divisória";
+
+            // Se não encontrar correspondência, devolve "Móvel" por defeito
+            return "Móvel";
         }
 #endif
     }

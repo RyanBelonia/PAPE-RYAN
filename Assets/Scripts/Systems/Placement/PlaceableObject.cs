@@ -21,10 +21,14 @@ namespace InteriorPlanner.Systems.Placement
         [Header("Validation Visual")]
         [SerializeField] private Material invalidMaterial; // NOVO: Arrasta o material vermelho para aqui!
 
+        [Header("UI Presentation")]
+        public string displayNamePT; // A nossa nova caixa para o nome em Português!
+        public string originalPrefabID; // <-- ADICIONA ISTO: O ID real e inalterável do ficheiro
+
         private bool isSelected;
         private bool isValidPosition = true;
         private MaterialPropertyBlock propertyBlock;
-        
+
         // Guarda os materiais originais para podermos voltar a eles depois do vermelho
         private Dictionary<Renderer, Material[]> originalMaterials = new Dictionary<Renderer, Material[]>();
 
@@ -34,7 +38,7 @@ namespace InteriorPlanner.Systems.Placement
         public bool CanScale => canScale;
         public bool RequiresWallSupport => requiresWallSupport;
         public bool IsSelected => isSelected;
-        public bool IsValidPosition => isValidPosition; 
+        public bool IsValidPosition => isValidPosition;
 
         // A tua função original intacta!
         public void Configure(
@@ -56,7 +60,7 @@ namespace InteriorPlanner.Systems.Placement
         private void Awake()
         {
             propertyBlock = new MaterialPropertyBlock();
-            
+
             // Quando o jogo começa, guardamos o aspeto original de todas as almofadas e madeiras
             if (renderersToHighlight != null)
             {
@@ -107,7 +111,7 @@ namespace InteriorPlanner.Systems.Placement
                     Material[] badMats = new Material[rend.materials.Length];
                     for (int i = 0; i < badMats.Length; i++) badMats[i] = invalidMaterial;
                     rend.materials = badMats;
-                    
+
                     // Limpa o amarelo se estiver selecionado para não misturar cores
                     rend.GetPropertyBlock(propertyBlock);
                     propertyBlock.Clear();
@@ -146,15 +150,15 @@ namespace InteriorPlanner.Systems.Placement
                 {
                     // Aplica fisicamente a nova tinta
                     rend.material = newMaterial;
-                    
+
                     // Atualiza a "memória" para que ele não volte ao branco ao ser selecionado
-                    originalMaterials[rend] = rend.materials; 
+                    originalMaterials[rend] = rend.materials;
                 }
             }
-            
+
             // Força o objeto a re-desenhar-se com a nova textura
-            UpdateVisualState(); 
+            UpdateVisualState();
         }
     }
-    
+
 }
