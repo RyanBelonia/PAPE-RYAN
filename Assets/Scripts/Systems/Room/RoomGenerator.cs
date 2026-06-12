@@ -27,14 +27,9 @@ namespace InteriorPlanner.Systems.Room
 
             RoomData room = AppManager.Instance.ProjectSession.CurrentProject.Room;
 
-            if (room == null)
-            {
-                Debug.LogWarning("RoomData inválido.");
-                return;
-            }
+            if (room == null) return;
 
             ClearRoom();
-
             CreateFloor(room);
             CreateWalls(room);
         }
@@ -47,47 +42,29 @@ namespace InteriorPlanner.Systems.Room
             floor.transform.position = new Vector3(0f, -floorThickness / 2f, 0f);
             floor.transform.localScale = new Vector3(room.Width, floorThickness, room.Length);
 
-            // --- NOVO: Define a layer do chão para "Ground" ---
             int groundLayer = LayerMask.NameToLayer("Ground");
-            if (groundLayer == -1)
-            {
-                Debug.LogWarning("A Layer 'Ground' não existe! Vai a Edit > Project Settings > Tags and Layers e cria-a.");
-            }
-            else
-            {
-                floor.layer = groundLayer;
-            }
-            // ----------------------------------------------------
+            if (groundLayer != -1) floor.layer = groundLayer;
 
-            if (floorMaterial != null)
-                floor.GetComponent<Renderer>().material = floorMaterial;
+            Renderer rend = floor.GetComponent<Renderer>();
+            if (floorMaterial != null) rend.material = floorMaterial;
+
+            // --- O HACK CORRIGIDO ---
+            var placeable = floor.AddComponent<InteriorPlanner.Systems.Placement.PlaceableObject>();
+            placeable.originalPrefabID = "Floor"; 
+            
+            // Dizemos ao PlaceableObject exatamente qual é o Renderer que ele tem de pintar
+            // e bloqueamos o movimento (false, false, false) para o utilizador não arrastar o chão!
+            placeable.Configure(InteriorPlanner.Systems.Placement.PlaceableObjectType.Furniture, false, false, false, false, new Renderer[] { rend });
+            
+            floor.AddComponent<InteriorPlanner.Systems.Tools.Paintable>();
         }
 
         private void CreateWalls(RoomData room)
         {
-            CreateWall(
-                "Wall_Front",
-                new Vector3(0f, room.Height / 2f, room.Length / 2f),
-                new Vector3(room.Width, room.Height, wallThickness)
-            );
-
-            CreateWall(
-                "Wall_Back",
-                new Vector3(0f, room.Height / 2f, -room.Length / 2f),
-                new Vector3(room.Width, room.Height, wallThickness)
-            );
-
-            CreateWall(
-                "Wall_Left",
-                new Vector3(-room.Width / 2f, room.Height / 2f, 0f),
-                new Vector3(wallThickness, room.Height, room.Length)
-            );
-
-            CreateWall(
-                "Wall_Right",
-                new Vector3(room.Width / 2f, room.Height / 2f, 0f),
-                new Vector3(wallThickness, room.Height, room.Length)
-            );
+            CreateWall("Wall_Front", new Vector3(0f, room.Height / 2f, room.Length / 2f), new Vector3(room.Width, room.Height, wallThickness));
+            CreateWall("Wall_Back", new Vector3(0f, room.Height / 2f, -room.Length / 2f), new Vector3(room.Width, room.Height, wallThickness));
+            CreateWall("Wall_Left", new Vector3(-room.Width / 2f, room.Height / 2f, 0f), new Vector3(wallThickness, room.Height, room.Length));
+            CreateWall("Wall_Right", new Vector3(room.Width / 2f, room.Height / 2f, 0f), new Vector3(wallThickness, room.Height, room.Length));
         }
 
         private void CreateWall(string wallName, Vector3 position, Vector3 scale)
@@ -98,20 +75,19 @@ namespace InteriorPlanner.Systems.Room
             wall.transform.position = position;
             wall.transform.localScale = scale;
 
-            // --- NOVO: Define a layer da parede para "Wall" ---
             int wallLayer = LayerMask.NameToLayer("Wall");      
-            if (wallLayer == -1)
-            {
-                Debug.LogWarning("A Layer 'Wall' não existe! Vai a Edit > Project Settings > Tags and Layers e cria-a.");
-            }
-            else
-            {
-                wall.layer = wallLayer;
-            }
-            // ---------------------------------------------------
+            if (wallLayer != -1) wall.layer = wallLayer;
 
-            if (wallMaterial != null)
-                wall.GetComponent<Renderer>().material = wallMaterial;
+            Renderer rend = wall.GetComponent<Renderer>();
+            if (wallMaterial != null) rend.material = wallMaterial;
+
+            // --- O HACK CORRIGIDO ---
+            var placeable = wall.AddComponent<InteriorPlanner.Systems.Placement.PlaceableObject>();
+            placeable.originalPrefabID = wallName; 
+            
+            placeable.Configure(InteriorPlanner.Systems.Placement.PlaceableObjectType.Furniture, false, false, false, false, new Renderer[] { rend });
+            
+            wall.AddComponent<InteriorPlanner.Systems.Tools.Paintable>();
         }
 
         private void ClearRoom()
