@@ -15,16 +15,20 @@ namespace InteriorPlanner.Systems.Save
         [Header("Database (Auto Populated)")]
         [SerializeField] private List<GameObject> prefabDatabase = new List<GameObject>();
         [SerializeField] private List<Material> materialDatabase = new List<Material>();
-
+        
+        [Header("Materiais Padrao")]
+        [SerializeField] private Material defaultWallMaterial;
+        [SerializeField] private Material defaultFloorMaterial;
+        
         private string SaveDirectory => Application.persistentDataPath + "/Saves/";
 
         private void Start()
         {
             if (!Directory.Exists(SaveDirectory)) Directory.CreateDirectory(SaveDirectory);
-            
-            // Espera 0.5 segundos para garantir que o RoomGenerator já fez as paredes
+
+            // Espera 0.2 segundos para garantir que o RoomGenerator já fez as paredes
             // e depois vai verificar se viemos do "Abrir Projeto" do Menu Inicial!
-            Invoke(nameof(CheckAutoLoad), 0.5f);
+            Invoke(nameof(CheckAutoLoad), 0.2f);
         }
 
         private void CheckAutoLoad()
@@ -33,10 +37,10 @@ namespace InteriorPlanner.Systems.Save
             if (PlayerPrefs.HasKey("ProjectToLoad"))
             {
                 string path = PlayerPrefs.GetString("ProjectToLoad");
-                
+
                 // Apaga a memória imediatamente para não voltar a carregar sem querer
-                PlayerPrefs.DeleteKey("ProjectToLoad"); 
-                
+                PlayerPrefs.DeleteKey("ProjectToLoad");
+
                 if (!string.IsNullOrEmpty(path))
                 {
                     LoadProjectFromFile(path);
@@ -81,89 +85,88 @@ namespace InteriorPlanner.Systems.Save
         // ==========================================
         // SISTEMA DE LOAD 
         // ==========================================
-        
+
         // Esta função é chamada pelo teu botão "Carregar" dentro da cena 3D
         public void LoadProjectWithBrowser()
         {
             var paths = StandaloneFileBrowser.OpenFilePanel("Abrir Projeto...", SaveDirectory, "json", false);
             if (paths.Length == 0 || string.IsNullOrEmpty(paths[0])) return;
-            
+
             LoadProjectFromFile(paths[0]);
         }
 
         // Esta é a função principal que faz o trabalho sujo (lê o texto e cria os móveis)
-private void LoadProjectFromFile(string fullPath)
+        private void LoadProjectFromFile(string fullPath)
         {
             if (!File.Exists(fullPath)) return;
 
             string jsonString = File.ReadAllText(fullPath);
             RoomSaveData loadedData = JsonUtility.FromJson<RoomSaveData>(jsonString);
 
-            // 1. LIMPEZA COM ESCUDO DAS PAREDES
+            // 1. LIMPEZA TOTAL (Sem escudos! Apaga absolutamente tudo)
             PlaceableObject[] existingObjects = Object.FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
             foreach (PlaceableObject obj in existingObjects)
             {
-                if (!string.IsNullOrEmpty(obj.originalPrefabID) && (obj.originalPrefabID == "Floor" || obj.originalPrefabID.StartsWith("Wall_")))
-                    continue; 
-                
-                DestroyImmediate(obj.gameObject); 
+                DestroyImmediate(obj.gameObject);
             }
 
-            // 2. RECONSTRUÇÃO DA MOBÍLIA E TINTAS
+            // 2. RECONSTRUÇÃO COMPLETA (Paredes, Chão e Móveis)
             int loadedCount = 0;
             foreach (FurnitureData data in loadedData.placedObjects)
             {
                 if (string.IsNullOrEmpty(data.prefabID)) continue;
 
-                // --- CASO A: É UMA PAREDE OU CHÃO ---
+                // --- CASO A: ESTRUTURA DA SALA (Cria do zero com o tamanho e posição guardados) ---
                 if (data.prefabID == "Floor" || data.prefabID.StartsWith("Wall_"))
                 {
-                    GameObject roomPart = GameObject.Find(data.prefabID);
-                    
-                    // A MAGIA: Se o RoomGenerator não construiu a parede (viemos do Menu Inicial), o SaveManager constrói!
-                    if (roomPart == null)
-                    {
-                        roomPart = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        roomPart.name = data.prefabID;
-                        
-                        // Restaura a matemática exata gravada no JSON
-                        roomPart.transform.position = data.position;
-                        roomPart.transform.rotation = data.rotation;
-                        roomPart.transform.localScale = data.scale;
+                    // Cria o cubo primitivo do zero
+                    GameObject roomPart = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    roomPart.name = data.prefabID;
 
-                        // Adiciona os scripts essenciais
-                        var placeable = roomPart.AddComponent<PlaceableObject>();
-                        placeable.originalPrefabID = data.prefabID;
-                        placeable.Configure(PlaceableObjectType.Furniture, false, false, false, false, new Renderer[] { roomPart.GetComponent<Renderer>() });
-                        
-                        roomPart.AddComponent<InteriorPlanner.Systems.Tools.Paintable>();
+                    // Aplica as transformações exatas que estavam no JSON (Tamanho e Posição certos!)
+                    roomPart.transform.position = data.position;
+                    roomPart.transform.rotation = data.rotation;
+                    roomPart.transform.localScale = data.scale;
 
-                        // Coloca na Layer correta para o rato e balde de tinta funcionarem
-                        int layer = data.prefabID == "Floor" ? LayerMask.NameToLayer("Ground") : LayerMask.NameToLayer("Wall");
-                        if (layer != -1) roomPart.layer = layer;
-                    }
+                    // Configura o componente PlaceableObject para o sistema o reconhecer no próximo Save
+                    var placeable = roomPart.AddComponent<PlaceableObject>();
+                    placeable.originalPrefabID = data.prefabID;
 
-                    // Aplica a tinta guardada
+                    Renderer rend = roomPart.GetComponent<Renderer>();
+
+                    // ----------------------------------------------------
+                    // NOVO: Aplica os materiais padrão logo à nascença!
+                    if (data.prefabID == "Floor" && defaultFloorMaterial != null) 
+                        rend.material = defaultFloorMaterial;
+                    else if (data.prefabID.StartsWith("Wall_") && defaultWallMaterial != null) 
+                        rend.material = defaultWallMaterial;
+                    // ----------------------------------------------------
+
+                    placeable.Configure(PlaceableObjectType.Furniture, false, false, false, false, new Renderer[] { rend });
+
+                    // Devolve a capacidade de ser pintado
+                    roomPart.AddComponent<InteriorPlanner.Systems.Tools.Paintable>();
+
+                    // Define as Layers corretas para o rato e o balde de tinta funcionarem
+                    int layer = data.prefabID == "Floor" ? LayerMask.NameToLayer("Ground") : LayerMask.NameToLayer("Wall");
+                    if (layer != -1) roomPart.layer = layer;
+
+                    // Aplica a textura/material guardado (se o utilizador tiver pintado de outra cor)
                     if (data.materialName != "Default")
                     {
                         Material savedMat = materialDatabase.Find(m => m.name == data.materialName);
-                        if (savedMat != null)
-                        {
-                            PlaceableObject placeable = roomPart.GetComponent<PlaceableObject>();
-                            if (placeable != null) placeable.UpdateOriginalMaterial(savedMat);
-                        }
+                        if (savedMat != null) placeable.UpdateOriginalMaterial(savedMat);
                     }
-                    continue; 
+                    continue;
                 }
 
-                // --- CASO B: É UM MÓVEL NORMAL ---
-                // Clona os móveis
+                // --- CASO B: MÓVEIS NORMIAIS (Clona da Base de Dados) ---
                 GameObject prefabToSpawn = prefabDatabase.Find(p => p.name == data.prefabID);
                 if (prefabToSpawn != null)
                 {
                     GameObject newObj = Instantiate(prefabToSpawn, data.position, data.rotation);
-                    newObj.name = data.prefabID; 
-                    newObj.transform.localScale = data.scale; 
+                    newObj.name = data.prefabID;
+                    newObj.transform.localScale = data.scale;
 
                     if (data.materialName != "Default")
                     {
@@ -173,8 +176,9 @@ private void LoadProjectFromFile(string fullPath)
                     loadedCount++;
                 }
             }
-            Debug.Log($"<color=cyan><b>Carregado:</b></color> {loadedData.projectName} aberto com sucesso a partir de {fullPath}");
+            Debug.Log($"<color=cyan><b>Carregado com Sucesso:</b></color> A estrutura e {loadedCount} móveis foram recriados!");
         }
+
         // ==========================================
         // AUTOMAÇÃO DA BASE DE DADOS
         // ==========================================
