@@ -3689,6 +3689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 324537257}
   - component: {fileID: 324537258}
+  - component: {fileID: 324537259}
   m_Layer: 0
   m_Name: VR_Rig
   m_TagString: Untagged
@@ -3705,7 +3706,7 @@ Transform:
   m_GameObject: {fileID: 324537256}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 370.8685, y: 204.3865, z: 54.11457}
+  m_LocalPosition: {x: 0, y: 0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3781,6 +3782,22 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!114 &324537259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324537256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ed34b652c921f46828ceef94759462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteriorPlanner.Systems.VR.VRViewerController
+  vrCamera: {fileID: 1990230929}
+  moveSpeed: 3
+  verticalSpeed: 2
+  turnSpeed: 60
 --- !u!1 &329387903
 GameObject:
   m_ObjectHideFlags: 0
@@ -17769,6 +17786,7 @@ GameObject:
   - component: {fileID: 1990230927}
   - component: {fileID: 1990230930}
   - component: {fileID: 1990230931}
+  - component: {fileID: 1990230932}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -17844,7 +17862,7 @@ Transform:
   m_GameObject: {fileID: 1990230926}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -370.8685, y: -202.68651, z: -57.11457}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17918,6 +17936,24 @@ MonoBehaviour:
   minEditY: 2
   minPitch: -80
   maxPitch: 80
+--- !u!114 &1990230932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990230926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.SpatialTracking::UnityEngine.SpatialTracking.TrackedPoseDriver
+  m_Device: 0
+  m_PoseSource: 2
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!1 &2031490318
 GameObject:
   m_ObjectHideFlags: 0
