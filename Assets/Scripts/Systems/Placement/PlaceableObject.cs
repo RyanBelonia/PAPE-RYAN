@@ -3,12 +3,18 @@ using System.Collections.Generic;
 
 namespace InteriorPlanner.Systems.Placement
 {
+    /// <summary>
+    /// O "Cérebro" individual de cada modelo 3D. Este script é anexado a todos os móveis, portas 
+    /// e divisórias do projeto. Ele guarda a identidade do objeto, as suas permissões físicas 
+    /// e controla a sua aparência (Filtro vermelho de erro ou realce amarelo de seleção).
+    /// </summary>
     public class PlaceableObject : MonoBehaviour
     {
         [Header("Object Info")]
         [SerializeField] private PlaceableObjectType objectType = PlaceableObjectType.Furniture;
 
         [Header("Capabilities")]
+        // Permissões que ditam como o utilizador pode interagir com este objeto
         [SerializeField] private bool canMove = true;
         [SerializeField] private bool canRotate = true;
         [SerializeField] private bool canScale = false;
@@ -19,17 +25,25 @@ namespace InteriorPlanner.Systems.Placement
         [SerializeField] private Color selectedColor = Color.yellow;
 
         [Header("Validation Visual")]
-        [SerializeField] private Material invalidMaterial; // NOVO: Arrasta o material vermelho para aqui!
+        [SerializeField] private Material invalidMaterial; // Material vermelho semi-transparente para erros de colisão
 
         [Header("UI Presentation")]
-        public string displayNamePT; // A nossa nova caixa para o nome em Português!
-        public string originalPrefabID; // <-- ADICIONA ISTO: O ID real e inalterável do ficheiro
+        public string displayNamePT; // Nome traduzido para apresentar na UI
+
+        // A "Chave Primária" para a Base de Dados do SaveManager. 
+        // Nunca muda, mesmo que o utilizador altere a cor do móvel.
+        public string originalPrefabID; 
 
         private bool isSelected;
         private bool isValidPosition = true;
+        
+        // MaterialPropertyBlock é uma técnica avançada de otimização da Unity. 
+        // Permite mudar a cor do objeto enviando dados diretos para a placa gráfica (GPU),
+        // em vez de criar cópias pesadas do Material na RAM do computador a cada clique.
         private MaterialPropertyBlock propertyBlock;
 
-        // Guarda os materiais originais para podermos voltar a eles depois do vermelho
+        // Dicionário que memoriza as texturas exatas (madeira, tecido) de cada peça do móvel
+        // para conseguir restaurá-las caso o objeto fique vermelho e depois volte ao normal.
         private Dictionary<Renderer, Material[]> originalMaterials = new Dictionary<Renderer, Material[]>();
 
         public PlaceableObjectType ObjectType => objectType;
@@ -40,7 +54,10 @@ namespace InteriorPlanner.Systems.Placement
         public bool IsSelected => isSelected;
         public bool IsValidPosition => isValidPosition;
 
-        // A tua função original intacta!
+        /// <summary>
+        /// Injeção de dependências: Chamada pelo AutoConfigurer (no Editor) ou pelo SaveManager (no Load)
+        /// para aplicar as regras lógicas à peça de forma automática.
+        /// </summary>
         public void Configure(
             PlaceableObjectType type,
             bool move,
@@ -61,7 +78,7 @@ namespace InteriorPlanner.Systems.Placement
         {
             propertyBlock = new MaterialPropertyBlock();
 
-            // Quando o jogo começa, guardamos o aspeto original de todas as almofadas e madeiras
+            // Snapshot da Memória Visual: Assim que o móvel "nasce", grava as texturas originais de cada peça
             if (renderersToHighlight != null)
             {
                 foreach (var rend in renderersToHighlight)
@@ -88,7 +105,9 @@ namespace InteriorPlanner.Systems.Placement
             UpdateVisualState();
         }
 
-        // NOVA: Função chamada pelo ObjectMover quando o objeto bate noutro
+        /// <summary>
+        /// Ouve o sistema de físicas (ObjectMover). Se o móvel bater noutro, a posição fica inválida.
+        /// </summary>
         public void SetValidState(bool isValid)
         {
             if (isValidPosition == isValid) return;
@@ -96,7 +115,12 @@ namespace InteriorPlanner.Systems.Placement
             UpdateVisualState();
         }
 
-        // NOVA: O "Cérebro" que decide que cor o móvel deve ter num dado momento
+        /// <summary>
+        /// A "Máquina de Estados Visual". Avalia a situação do móvel e pinta-o consoante a prioridade:
+        /// 1º Prioridade: Erro Físico (Fica todo Vermelho).
+        /// 2º Prioridade: Selecionado (Fica com um brilho Amarelo).
+        /// 3º Prioridade: Normal (Restaura as texturas de madeira e tecido).
+        /// </summary>
         private void UpdateVisualState()
         {
             if (renderersToHighlight == null) return;
@@ -107,28 +131,29 @@ namespace InteriorPlanner.Systems.Placement
 
                 if (!isValidPosition && invalidMaterial != null)
                 {
-                    // 1. ESTADO INVÁLIDO (Bateu em algo) -> Troca tudo pelo material Vermelho
+                    // 1. ESTADO INVÁLIDO (Colisão) -> Troca tudo pelo material Vermelho de Erro
                     Material[] badMats = new Material[rend.materials.Length];
                     for (int i = 0; i < badMats.Length; i++) badMats[i] = invalidMaterial;
                     rend.materials = badMats;
 
-                    // Limpa o amarelo se estiver selecionado para não misturar cores
+                    // Limpa a cor de seleção (amarelo) da Placa Gráfica para não se misturar com o vermelho
                     rend.GetPropertyBlock(propertyBlock);
                     propertyBlock.Clear();
                     rend.SetPropertyBlock(propertyBlock);
                 }
                 else
                 {
-                    // 2. ESTADO VÁLIDO -> Restaura os materiais originais do móvel
+                    // 2. ESTADO VÁLIDO -> Restaura a lista de materiais armazenada na RAM
                     if (originalMaterials.ContainsKey(rend))
                     {
                         rend.materials = originalMaterials[rend];
                     }
 
-                    // 3. ESTADO SELECIONADO -> Se além de válido estiver clicado, aplica o teu amarelo!
+                    // 3. ESTADO SELECIONADO -> Aplica a cor amarela via GPU por cima da textura do móvel
                     rend.GetPropertyBlock(propertyBlock);
                     if (isSelected)
                     {
+                        // O shader precisa de ter a propriedade "_BaseColor" ou equivalente para isto brilhar
                         propertyBlock.SetColor("_BaseColor", selectedColor);
                     }
                     else
@@ -139,7 +164,12 @@ namespace InteriorPlanner.Systems.Placement
                 }
             }
         }
-        // NOVA FUNÇÃO: O Balde de Tinta chama isto para atualizar a memória do objeto!
+
+        /// <summary>
+        /// Ponte com a ferramenta PaintTool. Quando o utilizador deita o balde de tinta numa parede,
+        /// esta função garante que o "Snapshot da Memória Visual" é atualizado para a nova cor,
+        /// caso contrário a parede voltaria ao branco assim que fosse deselecionada.
+        /// </summary>
         public void UpdateOriginalMaterial(Material newMaterial)
         {
             if (renderersToHighlight == null) return;
@@ -151,14 +181,13 @@ namespace InteriorPlanner.Systems.Placement
                     // Aplica fisicamente a nova tinta
                     rend.material = newMaterial;
 
-                    // Atualiza a "memória" para que ele não volte ao branco ao ser selecionado
+                    // Atualiza a memória de segurança interna
                     originalMaterials[rend] = rend.materials;
                 }
             }
 
-            // Força o objeto a re-desenhar-se com a nova textura
+            // Força a atualização da máquina de estados
             UpdateVisualState();
         }
     }
-
 }

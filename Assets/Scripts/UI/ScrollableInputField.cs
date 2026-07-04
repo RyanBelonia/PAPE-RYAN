@@ -4,13 +4,16 @@ using TMPro;
 
 namespace InteriorPlanner.UI
 {
+    /// <summary>
+    /// Componente de UX "Qualidade de Vida". Permite ao utilizador alterar números 
+    /// na UI apenas rolando a roda do rato, evitando a digitação constante.
+    /// </summary>
     [RequireComponent(typeof(TMP_InputField))]
     public class ScrollableInputField : MonoBehaviour, IScrollHandler
     {
-        [Tooltip("Quanto o valor aumenta/diminui por cada 'clique' da roda do rato.")]
+        [Tooltip("Quanto o valor aumenta/diminui por cada clique da roda do rato.")]
         [SerializeField] private float scrollStep = 0.1f;
         
-        [Tooltip("Limites opcionais para não deixar o valor ficar gigante ou negativo.")]
         [SerializeField] private bool useLimits = false;
         [SerializeField] private float minValue = 0.1f;
         [SerializeField] private float maxValue = 10f;
@@ -19,36 +22,30 @@ namespace InteriorPlanner.UI
 
         private void Awake()
         {
-            // Apanha a caixinha de texto automaticamente
             inputField = GetComponent<TMP_InputField>();
         }
 
-        // Esta função é chamada automaticamente pela Unity quando usas o scroll do rato em cima do objeto
+        // Interface IScrollHandler: deteta quando o utilizador roda o rato sobre este objeto
         public void OnScroll(PointerEventData eventData)
         {
-            // Ignora se o scroll for 0
             if (eventData.scrollDelta.y == 0) return;
 
-            // Vê se rodaste para cima (+1) ou para baixo (-1)
             float scrollDirection = Mathf.Sign(eventData.scrollDelta.y);
 
-            // Tenta converter o texto que lá está num número
             if (float.TryParse(inputField.text, out float currentValue))
             {
-                // Soma ou subtrai o valor do passo
                 float newValue = currentValue + (scrollDirection * scrollStep);
 
-                // Aplica limites (se ativares isso no Inspector)
                 if (useLimits)
                 {
                     newValue = Mathf.Clamp(newValue, minValue, maxValue);
                 }
 
-                // Escreve o novo valor na caixinha (com 2 casas decimais)
+                // Formatação: "F2" garante que o número aparece com 2 casas decimais (ex: 4.00)
                 inputField.text = newValue.ToString("F2");
 
-                // Força o InputField a avisar o resto do jogo que o valor mudou
-                // Assim a divisória estica logo na hora, sem teres de carregar no Enter!
+                // Invoca o evento de mudança. O sistema reage em tempo real 
+                // sem o utilizador ter de carregar em "Enter".
                 inputField.onValueChanged.Invoke(inputField.text);
             }
         }

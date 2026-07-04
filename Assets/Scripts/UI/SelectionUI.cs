@@ -5,6 +5,10 @@ using InteriorPlanner.Systems.Placement;
 
 namespace InteriorPlanner.Systems.UI
 {
+    /// <summary>
+    /// Controlador da interface que permite a manipulação de precisão dos objetos selecionados na cena.
+    /// Gere a sincronização entre os valores numéricos da UI e as propriedades de Transform do objeto 3D.
+    /// </summary>
     public class SelectionUI : MonoBehaviour
     {
         [Header("System References")]
@@ -35,16 +39,18 @@ namespace InteriorPlanner.Systems.UI
 
         private Vector3 lastKnownPosition;
         private Vector3 lastKnownRotation;
-        private Vector3 lastKnownSizeInMeters; // Agora guarda o tamanho em METROS
-        private Vector3 objectBaseSize; // O tamanho original do modelo 3D
+        private Vector3 lastKnownSizeInMeters; // Armazena a dimensão em metros reais
+        private Vector3 objectBaseSize; // Tamanho de referência do modelo 3D (para cálculo de escala)
 
         private void Start()
         {
             uiPanel.SetActive(false);
 
+            // Registo de eventos para botões e inputs de edição
             if (closeButton) closeButton.onClick.AddListener(Deselect);
             if (deleteButton) deleteButton.onClick.AddListener(DeleteObject);
 
+            // Ao terminar a edição de qualquer campo numérico, o sistema força a atualização do objeto
             posX.onEndEdit.AddListener(val => UpdateObjectTransform());
             posY.onEndEdit.AddListener(val => UpdateObjectTransform());
             posZ.onEndEdit.AddListener(val => UpdateObjectTransform());
@@ -64,6 +70,7 @@ namespace InteriorPlanner.Systems.UI
 
             PlaceableObject selected = selectionManager.GetSelectedObject();
 
+            // Alterna o estado da interface com base na seleção atual
             if (selected != currentObject)
             {
                 currentObject = selected;
@@ -71,6 +78,7 @@ namespace InteriorPlanner.Systems.UI
                 else HideUI();
             }
 
+            // Monitoriza alterações externas para sincronizar com a UI
             if (currentObject != null)
             {
                 CheckForExternalChanges();
@@ -82,10 +90,11 @@ namespace InteriorPlanner.Systems.UI
             uiPanel.SetActive(true);
             if (objectNameText) objectNameText.text = currentObject.name.Replace("(Clone)", "").Trim();
 
-            // Descobre o tamanho base original do modelo usando o BoxCollider
+            // Extrai o tamanho base do objeto para conversão de escala métrica
             BoxCollider boxCol = currentObject.GetComponent<BoxCollider>();
             objectBaseSize = boxCol != null ? boxCol.size : Vector3.one;
 
+            // Define se os campos são editáveis consoante as capacidades do objeto
             bool canMove = currentObject.CanMove;
             posX.interactable = canMove;
             posY.interactable = canMove;
@@ -114,7 +123,7 @@ namespace InteriorPlanner.Systems.UI
             lastKnownPosition = currentObject.transform.position;
             lastKnownRotation = currentObject.transform.eulerAngles;
             
-            // Calcula os Metros = Tamanho Original * Multiplicador de Escala
+            // Cálculo: Metros = (Escala local * Tamanho original do modelo 3D)
             lastKnownSizeInMeters = new Vector3(
                 objectBaseSize.x * currentObject.transform.localScale.x,
                 objectBaseSize.y * currentObject.transform.localScale.y,
@@ -128,6 +137,7 @@ namespace InteriorPlanner.Systems.UI
         {
             Transform objT = currentObject.transform;
 
+            // Atualiza campos de posição apenas se o objeto mudou e o input não está focado
             if (objT.position != lastKnownPosition && !posX.isFocused && !posY.isFocused && !posZ.isFocused)
             {
                 lastKnownPosition = objT.position;
@@ -136,6 +146,7 @@ namespace InteriorPlanner.Systems.UI
                 SetInputTextWithoutNotify(posZ, lastKnownPosition.z);
             }
 
+            // Atualiza campos de rotação
             if (objT.eulerAngles != lastKnownRotation && !rotX.isFocused && !rotY.isFocused && !rotZ.isFocused)
             {
                 lastKnownRotation = objT.eulerAngles;
@@ -144,7 +155,7 @@ namespace InteriorPlanner.Systems.UI
                 SetInputTextWithoutNotify(rotZ, lastKnownRotation.z);
             }
 
-            // Verifica se a escala mudou de fora
+            // Atualiza campos de escala
             Vector3 currentSizeMeters = new Vector3(
                 objectBaseSize.x * objT.localScale.x,
                 objectBaseSize.y * objT.localScale.y,
@@ -185,37 +196,34 @@ namespace InteriorPlanner.Systems.UI
         {
             if (currentObject == null) return;
 
-            // POSIÇÃO
+            // Extração de dados da UI com validação via TryParse
             float px = float.TryParse(posX.text, out float _px) ? _px : lastKnownPosition.x;
             float py = float.TryParse(posY.text, out float _py) ? _py : lastKnownPosition.y;
             float pz = float.TryParse(posZ.text, out float _pz) ? _pz : lastKnownPosition.z;
 
-            // ROTAÇÃO
             float rx = float.TryParse(rotX.text, out float _rx) ? _rx : lastKnownRotation.x;
             float ry = float.TryParse(rotY.text, out float _ry) ? _ry : lastKnownRotation.y;
             float rz = float.TryParse(rotZ.text, out float _rz) ? _rz : lastKnownRotation.z;
 
-            // TAMANHO EM METROS
             float sizeX = float.TryParse(scaleX.text, out float _sx) ? _sx : lastKnownSizeInMeters.x;
             float sizeY = float.TryParse(scaleY.text, out float _sy) ? _sy : lastKnownSizeInMeters.y;
             float sizeZ = float.TryParse(scaleZ.text, out float _sz) ? _sz : lastKnownSizeInMeters.z;
 
-            // Limita o tamanho para não desaparecer (min: 10cm) nem ficar infinito (max: 15 metros)
+            // Aplicação de limites físicos para evitar geometrias inválidas
             sizeX = Mathf.Clamp(sizeX, 0.1f, 15f);
             sizeY = Mathf.Clamp(sizeY, 0.1f, 15f);
             sizeZ = Mathf.Clamp(sizeZ, 0.1f, 15f);
 
-            // Converte os metros de volta para Escala (Multiplicador)
+            // Cálculo da escala relativa ao tamanho original do Prefab
             float newScaleX = objectBaseSize.x > 0 ? sizeX / objectBaseSize.x : 1f;
             float newScaleY = objectBaseSize.y > 0 ? sizeY / objectBaseSize.y : 1f;
             float newScaleZ = objectBaseSize.z > 0 ? sizeZ / objectBaseSize.z : 1f;
 
-            // APLICA AO OBJETO
+            // Aplicação das transformações (respeitando permissões de cada objeto)
             if (currentObject.CanMove) currentObject.transform.position = new Vector3(px, py, pz);
             if (currentObject.CanRotate) currentObject.transform.eulerAngles = new Vector3(rx, ry, rz);
             if (currentObject.CanScale) currentObject.transform.localScale = new Vector3(newScaleX, newScaleY, newScaleZ);
 
-            // Atualiza os valores conhecidos
             ForceReadValues();
         }
 

@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace InteriorPlanner.Systems.Furniture
 {
+    /// <summary>
+    /// Classe mediadora ("Middle-man") leve. Recebe a indicação de clique da Interface Gráfica 
+    /// e passa essa ordem para o FurniturePlacer materializar o móvel.
+    /// </summary>
     public class FurnitureSelectionManager : MonoBehaviour
     {
         public static FurnitureSelectionManager Instance { get; private set; }
@@ -25,6 +29,7 @@ namespace InteriorPlanner.Systems.Furniture
 
             Debug.Log("Móvel selecionado: " + item.DisplayName);
 
+            // Passa a bola para o sistema de criação (Placer)
             if (FurniturePlacer.Instance != null)
             {
                 FurniturePlacer.Instance.PlaceFurniture(item);

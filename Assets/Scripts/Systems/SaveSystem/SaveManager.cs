@@ -2,43 +2,52 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using InteriorPlanner.Systems.Placement;
-using SFB; // Biblioteca do explorador do Windows
+using SFB; // Biblioteca externa: Standalone File Browser (Interface de ficheiros nativa do Windows)
 
 #if UNITY_EDITOR
-using UnityEditor;
+using UnityEditor; // Necessário apenas para funções de automação no Editor (como o 'Auto Populate')
 #endif
 
 namespace InteriorPlanner.Systems.Save
 {
+    /// <summary>
+    /// O motor de persistência do projeto. É responsável por converter a cena 3D viva (RAM) 
+    /// num ficheiro JSON estático (Disco) e vice-versa.
+    /// </summary>
     public class SaveManager : MonoBehaviour
     {
         [Header("Database (Auto Populated)")]
+        // Bases de dados que o script preenche sozinho para saber o que pode instanciar ao carregar
         [SerializeField] private List<GameObject> prefabDatabase = new List<GameObject>();
         [SerializeField] private List<Material> materialDatabase = new List<Material>();
         
         [Header("Materiais Padrao")]
+        // Referências para aplicar texturas automaticamente caso o save seja antigo ou vazio
         [SerializeField] private Material defaultWallMaterial;
         [SerializeField] private Material defaultFloorMaterial;
         
+        // Define o caminho de gravação (pasta %AppData% do Unity)
         private string SaveDirectory => Application.persistentDataPath + "/Saves/";
 
         private void Start()
         {
+            // Cria a pasta "Saves" se esta ainda não existir
             if (!Directory.Exists(SaveDirectory)) Directory.CreateDirectory(SaveDirectory);
 
-            // Espera 0.2 segundos para garantir que o RoomGenerator já fez as paredes
-            // e depois vai verificar se viemos do "Abrir Projeto" do Menu Inicial!
+            // Pequeno delay para garantir que o RoomGenerator termina de construir as paredes 
+            // antes de tentarmos carregar um projeto guardado.
             Invoke(nameof(CheckAutoLoad), 0.2f);
         }
 
         private void CheckAutoLoad()
         {
-            // Verifica se o Menu Inicial deixou um ficheiro na memória
+            // O Menu Inicial comunica com esta cena através do PlayerPrefs.
+            // Se o utilizador carregou em "Abrir Projeto" no Menu, o caminho está aqui guardado.
             if (PlayerPrefs.HasKey("ProjectToLoad"))
             {
                 string path = PlayerPrefs.GetString("ProjectToLoad");
 
-                // Apaga a memória imediatamente para não voltar a carregar sem querer
+                // Apaga a chave da memória para evitar um loop de carregamento infinito
                 PlayerPrefs.DeleteKey("ProjectToLoad");
 
                 if (!string.IsNullOrEmpty(path))
@@ -49,33 +58,39 @@ namespace InteriorPlanner.Systems.Save
         }
 
         // ==========================================
-        // SISTEMA DE SAVE (COM WINDOWS EXPLORER)
+        // SISTEMA DE SAVE (Serialização JSON)
         // ==========================================
         public void SaveProjectWithBrowser()
         {
+            // Abre o explorador do Windows para o utilizador escolher onde guardar
             string path = StandaloneFileBrowser.SaveFilePanel("Guardar Projeto Como...", SaveDirectory, "Meu_Projeto", "json");
             if (string.IsNullOrEmpty(path)) return;
 
+            // Cria o objeto "Envelope" (RoomSaveData) que conterá toda a lista de móveis
             RoomSaveData newSave = new RoomSaveData();
             newSave.projectName = Path.GetFileNameWithoutExtension(path);
             newSave.lastSavedDate = System.DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
 
+            // Procura todos os objetos na sala que possuem o script 'PlaceableObject' (o nosso componente de inteligência)
             PlaceableObject[] allObjects = Object.FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
 
             foreach (PlaceableObject obj in allObjects)
             {
                 FurnitureData data = new FurnitureData();
+                // Regista o ID do prefab para saber qual objeto reconstruir no 'Load'
                 data.prefabID = !string.IsNullOrEmpty(obj.originalPrefabID) ? obj.originalPrefabID : obj.gameObject.name.Replace("(Clone)", "").Trim();
                 data.position = obj.transform.position;
                 data.rotation = obj.transform.rotation;
                 data.scale = obj.transform.localScale;
 
+                // Captura o nome do material (cor) para salvar a personalização do utilizador
                 Renderer rend = obj.GetComponentInChildren<Renderer>();
                 data.materialName = (rend != null && rend.sharedMaterial != null) ? rend.sharedMaterial.name.Replace(" (Instance)", "").Trim() : "Default";
 
                 newSave.placedObjects.Add(data);
             }
 
+            // Converte o objeto em texto JSON e grava no disco
             string jsonString = JsonUtility.ToJson(newSave, true);
             File.WriteAllText(path, jsonString);
 
@@ -83,10 +98,9 @@ namespace InteriorPlanner.Systems.Save
         }
 
         // ==========================================
-        // SISTEMA DE LOAD 
+        // SISTEMA DE LOAD (Desserialização)
         // ==========================================
 
-        // Esta função é chamada pelo teu botão "Carregar" dentro da cena 3D
         public void LoadProjectWithBrowser()
         {
             var paths = StandaloneFileBrowser.OpenFilePanel("Abrir Projeto...", SaveDirectory, "json", false);
@@ -95,63 +109,56 @@ namespace InteriorPlanner.Systems.Save
             LoadProjectFromFile(paths[0]);
         }
 
-        // Esta é a função principal que faz o trabalho sujo (lê o texto e cria os móveis)
         private void LoadProjectFromFile(string fullPath)
         {
             if (!File.Exists(fullPath)) return;
 
+            // Lê o texto JSON e transforma-o de volta em objetos de memória (C# Classes)
             string jsonString = File.ReadAllText(fullPath);
             RoomSaveData loadedData = JsonUtility.FromJson<RoomSaveData>(jsonString);
 
-            // 1. LIMPEZA TOTAL (Sem escudos! Apaga absolutamente tudo)
+            // 1. LIMPEZA TOTAL: Apaga tudo o que está na sala antes de reconstruir (Evita sobreposição de móveis)
             PlaceableObject[] existingObjects = Object.FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
             foreach (PlaceableObject obj in existingObjects)
             {
                 DestroyImmediate(obj.gameObject);
             }
 
-            // 2. RECONSTRUÇÃO COMPLETA (Paredes, Chão e Móveis)
+            // 2. RECONSTRUÇÃO COMPLETA: Itera pelos dados carregados e repõe a mobília
             int loadedCount = 0;
             foreach (FurnitureData data in loadedData.placedObjects)
             {
                 if (string.IsNullOrEmpty(data.prefabID)) continue;
 
-                // --- CASO A: ESTRUTURA DA SALA (Cria do zero com o tamanho e posição guardados) ---
+                // --- CASO A: ESTRUTURA DA SALA (Chão/Paredes gerados procedimentalmente) ---
                 if (data.prefabID == "Floor" || data.prefabID.StartsWith("Wall_"))
                 {
-                    // Cria o cubo primitivo do zero
                     GameObject roomPart = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     roomPart.name = data.prefabID;
 
-                    // Aplica as transformações exatas que estavam no JSON (Tamanho e Posição certos!)
+                    // Aplica as transformações de posição e escala guardadas
                     roomPart.transform.position = data.position;
                     roomPart.transform.rotation = data.rotation;
                     roomPart.transform.localScale = data.scale;
 
-                    // Configura o componente PlaceableObject para o sistema o reconhecer no próximo Save
                     var placeable = roomPart.AddComponent<PlaceableObject>();
                     placeable.originalPrefabID = data.prefabID;
 
                     Renderer rend = roomPart.GetComponent<Renderer>();
 
-                    // ----------------------------------------------------
-                    // NOVO: Aplica os materiais padrão logo à nascença!
+                    // Aplica o material padrão definido no Inspector se o objeto não tiver sido pintado
                     if (data.prefabID == "Floor" && defaultFloorMaterial != null) 
                         rend.material = defaultFloorMaterial;
                     else if (data.prefabID.StartsWith("Wall_") && defaultWallMaterial != null) 
                         rend.material = defaultWallMaterial;
-                    // ----------------------------------------------------
 
                     placeable.Configure(PlaceableObjectType.Furniture, false, false, false, false, new Renderer[] { rend });
-
-                    // Devolve a capacidade de ser pintado
                     roomPart.AddComponent<InteriorPlanner.Systems.Tools.Paintable>();
 
-                    // Define as Layers corretas para o rato e o balde de tinta funcionarem
                     int layer = data.prefabID == "Floor" ? LayerMask.NameToLayer("Ground") : LayerMask.NameToLayer("Wall");
                     if (layer != -1) roomPart.layer = layer;
 
-                    // Aplica a textura/material guardado (se o utilizador tiver pintado de outra cor)
+                    // Se o utilizador tinha pintado a parede com cor personalizada, recupera-a da base de dados
                     if (data.materialName != "Default")
                     {
                         Material savedMat = materialDatabase.Find(m => m.name == data.materialName);
@@ -160,7 +167,7 @@ namespace InteriorPlanner.Systems.Save
                     continue;
                 }
 
-                // --- CASO B: MÓVEIS NORMIAIS (Clona da Base de Dados) ---
+                // --- CASO B: MÓVEIS NORMIAIS (Instancia Prefabs do projeto) ---
                 GameObject prefabToSpawn = prefabDatabase.Find(p => p.name == data.prefabID);
                 if (prefabToSpawn != null)
                 {
@@ -168,6 +175,7 @@ namespace InteriorPlanner.Systems.Save
                     newObj.name = data.prefabID;
                     newObj.transform.localScale = data.scale;
 
+                    // Se o móvel tinha uma cor personalizada, re-aplica-a
                     if (data.materialName != "Default")
                     {
                         Material savedMat = materialDatabase.Find(m => m.name == data.materialName);
@@ -180,9 +188,13 @@ namespace InteriorPlanner.Systems.Save
         }
 
         // ==========================================
-        // AUTOMAÇÃO DA BASE DE DADOS
+        // AUTOMAÇÃO DA BASE DE DADOS (Edição de Conteúdo)
         // ==========================================
 #if UNITY_EDITOR
+        /// <summary>
+        /// Ferramenta interna que varre as pastas do projeto à procura de Prefabs e Materiais.
+        /// Isto evita que o programador tenha de arrastar 100+ objetos manualmente para listas na UI.
+        /// </summary>
         [ContextMenu("3. Auto Populate Databases")]
         public void AutoPopulateDatabases()
         {

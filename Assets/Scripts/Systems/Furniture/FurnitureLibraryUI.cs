@@ -7,13 +7,19 @@ using UnityEditor;
 
 namespace InteriorPlanner.Systems.Furniture
 {
+    /// <summary>
+    /// O motor responsável por ler a base de dados de móveis e desenhar os botões na Interface Gráfica.
+    /// Possui um sistema inteligente de automação no Editor que mapeia, categoriza e traduz 
+    /// centenas de modelos 3D automaticamente para a UI.
+    /// </summary>
     public class FurnitureLibraryUI : MonoBehaviour
     {
         [Header("UI References")]
-        [SerializeField] private Transform furnitureContent;
+        [SerializeField] private Transform furnitureContent; // O contentor "Content" do ScrollView
         [SerializeField] private GameObject furnitureButtonPrefab;
 
         [Header("Auto Load Paths")]
+        // Caminhos de onde o script vai extrair automaticamente os dados no Editor
         [SerializeField] private string[] prefabsRootFolders = { 
             "Assets/Prefabs/Furniture", 
             "Assets/Prefabs/Structural" 
@@ -30,10 +36,13 @@ namespace InteriorPlanner.Systems.Furniture
 
         private void Start()
         {
+            // Ao iniciar, gera os botões de todos os móveis disponíveis sem filtros
             ShowAll();
         }
 
-        // --- MÉTODOS DE FILTRO ---
+        // ==========================================
+        // MÉTODOS DE FILTRO DA UI
+        // ==========================================
 
         public void ShowAll()
         {
@@ -55,13 +64,16 @@ namespace InteriorPlanner.Systems.Furniture
             GenerateFurnitureButtons(filtered);
         }
 
+        // Ponte para o sistema de UI Buttons da Unity, que não suporta passagem de Enums diretos por OnClick()
         public void FilterByCategoryInt(int categoryIndex)
         {
             FurnitureCategory category = (FurnitureCategory)categoryIndex;
             FilterByCategory(category);
         }
 
-        // --- LÓGICA DE GERAÇÃO DE UI ---
+        // ==========================================
+        // LÓGICA DE GERAÇÃO E LIMPEZA DE UI
+        // ==========================================
 
         private void GenerateFurnitureButtons(List<FurnitureItemData> itemsToShow)
         {
@@ -75,11 +87,13 @@ namespace InteriorPlanner.Systems.Furniture
 
             for (int i = 0; i < itemsToShow.Count; i++)
             {
+                // Instancia o botão visual como filho do Content do ScrollView
                 GameObject buttonObject = Instantiate(furnitureButtonPrefab, furnitureContent);
                 FurnitureButtonUI buttonUI = buttonObject.GetComponent<FurnitureButtonUI>();
 
                 if (buttonUI != null)
                 {
+                    // Passa o pacote de dados para o botão se saber desenhar a si próprio
                     buttonUI.Setup(itemsToShow[i]);
                 }
             }
@@ -89,15 +103,23 @@ namespace InteriorPlanner.Systems.Furniture
         {
             if (furnitureContent == null) return;
 
+            // Apaga todos os botões filhos de trás para a frente (para não causar erros de índice na lista)
             for (int i = furnitureContent.childCount - 1; i >= 0; i--)
             {
                 Destroy(furnitureContent.GetChild(i).gameObject);
             }
         }
 
-        // --- LÓGICA AUTOMÁTICA (APENAS NO EDITOR) ---
+        // ==========================================
+        // LÓGICA AUTOMÁTICA (APENAS NO EDITOR DE DESENVOLVIMENTO)
+        // ==========================================
 
 #if UNITY_EDITOR
+        /// <summary>
+        /// Ferramenta de Editor que poupa centenas de horas manuais. 
+        /// Faz correspondência entre os ficheiros .prefab 3D e as imagens .png 2D, 
+        /// deduz a categoria pela pasta e aplica uma tradução PT-PT ao nome.
+        /// </summary>
         [ContextMenu("Auto Populate Furniture Items")]
         private void AutoPopulateFurnitureItems()
         {
@@ -111,6 +133,7 @@ namespace InteriorPlanner.Systems.Furniture
                     continue; 
                 }
 
+                // Encontra os identificadores únicos de todos os modelos 3D
                 string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { rootFolder });
 
                 for (int i = 0; i < prefabGuids.Length; i++)
@@ -120,6 +143,7 @@ namespace InteriorPlanner.Systems.Furniture
 
                     if (prefab == null) continue;
 
+                    // Deduz a categoria (Beds, Sofas, etc.) olhando para a subpasta onde o modelo está guardado
                     string categoryFolderName = GetImmediateCategoryFolder(prefabPath, rootFolder);
 
                     if (!TryParseCategory(categoryFolderName, out FurnitureCategory category))
@@ -128,6 +152,7 @@ namespace InteriorPlanner.Systems.Furniture
                         continue;
                     }
 
+                    // Tenta encontrar a imagem da miniatura usando o mesmo nome do Prefab
                     Sprite thumbnail = null;
                     string[] iconGuids = AssetDatabase.FindAssets($"{prefab.name} t:Sprite", iconsRootFolders);
                     
@@ -141,7 +166,7 @@ namespace InteriorPlanner.Systems.Furniture
                         Debug.LogWarning($"<color=orange>Aviso:</color> Ícone não encontrado para '{prefab.name}'. Confirma se a imagem existe nas pastas indicadas e se está como Sprite (2D and UI).");
                     }
 
-                    // --- O SEGREDO ESTÁ AQUI: Chamamos a função de tradução para o DisplayName ---
+                    // Preenche o envelope final aplicando o dicionário de tradução
                     FurnitureItemData item = new FurnitureItemData
                     {
                         DisplayName = TranslateToPortuguese(prefab.name, prefabPath),
@@ -154,6 +179,7 @@ namespace InteriorPlanner.Systems.Furniture
                 }
             }
 
+            // Força a gravação das alterações no ficheiro .unity da cena
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
 
@@ -179,6 +205,7 @@ namespace InteriorPlanner.Systems.Furniture
         }
 
         // --- DICIONÁRIO DE TRADUÇÃO PT-PT ---
+        // Exemplo de foco na Experiência do Utilizador (UX), convertendo "Bed_01" para "Cama".
         private string TranslateToPortuguese(string englishName, string path)
         {
             string lowerName = englishName.ToLower();
